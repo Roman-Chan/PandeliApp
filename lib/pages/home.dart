@@ -9,29 +9,32 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Column(
-        children : [ 
-        ElevatedButton(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children : [ 
+          ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/fourth');
+                },
+                child: const Text('Order history'),
+              ),
+            
+            ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/fourth');
+                Navigator.pushNamed(context, '/fifth');
               },
-              child: const Text('Order history'),
+              child: const Text('Account'),
             ),
-          
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/fifth');
-            },
-            child: const Text('Account'),
-          ),
 
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/eighth');
-            },
-            child: const Text('order'),
-          ),
-        ],
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/eighth');
+              },
+              child: const Text('order'),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -9,22 +9,25 @@ class Account extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Account'),
       ),
-      body: Column(
-        children : [ 
-        ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/sixth');
-              },
-              child: const Text('Payment methods'),
-            ),
-          
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children : [ 
           ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/seventh');
-            },
-            child: const Text('Info_Profile'),
-          ),
-        ],
+                onPressed: () {
+                  Navigator.pushNamed(context, '/sixth');
+                },
+                child: const Text('Payment methods'),
+              ),
+            
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/seventh');
+              },
+              child: const Text('Info_Profile'),
+            ),
+          ],
+        ),
       ),
     );
   }

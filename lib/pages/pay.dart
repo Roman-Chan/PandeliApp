@@ -9,15 +9,18 @@ class Pay extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Pay'),
       ),
-      body: Column(
-        children : [ 
-        ElevatedButton(
+      body: Center(
+        child : Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/third');
               },
               child: const Text('Finish'),
             ),
-        ],
+          ],
+        ),
       ),
     );
   }

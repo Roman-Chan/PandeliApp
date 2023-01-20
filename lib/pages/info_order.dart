@@ -9,15 +9,18 @@ class InfoOrder extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Order information'),
       ),
-      body: Column(
-        children : [ 
-        ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/ninth');
-              },
-              child: const Text('Pago'),
-            ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children : [ 
+          ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/ninth');
+                },
+                child: const Text('Pago'),
+              ),
+          ],
+        ),
       ),
     );
   }

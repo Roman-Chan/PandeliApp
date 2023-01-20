@@ -9,23 +9,26 @@ class Login extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Login'),
       ),
-      body: Column(
-        children : [ 
-        ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/second');
-              },
-              child: const Text('Registro'),
-            ),
-          
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children : [ 
           ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/third');
-            },
-            child: const Text('Home'),
-          ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/second');
+                },
+                child: const Text('Registro'),
+              ),
+            
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/third');
+              },
+              child: const Text('Home'),
+            ),
 
-        ],
+          ],
+        ),
       ),
     );
   }
