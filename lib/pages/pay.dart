@@ -7,7 +7,7 @@ class Pay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Pay'),
       ),
       body: Column(
         children : [ 
