@@ -15,20 +15,23 @@ class TitleSection extends StatelessWidget {
         vertical: 20,
         horizontal: 20,
       ),
-      child: Column(
-        children: [
-          Text(
-            title.toUpperCase(),
-            style: Theme.of(context).textTheme.titleLarge,
+      child: Card(
+        color: Theme.of(context).colorScheme.primary,
+        
+        child: SizedBox(
+          width: double.infinity,
+          height: 40,
+          child: Center(
+            child: Text(
+              title.toUpperCase(),
+              style: Theme.of(context).textTheme.titleLarge?.merge(
+                TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                )
+              ),
+            ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          Divider(
-            color: Theme.of(context).colorScheme.primary,
-            height: 4,
-          ),
-        ],
+        ),
       ),
     );
   }
