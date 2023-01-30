@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 
-class OrderHistory extends StatelessWidget {
-  const OrderHistory({super.key});
+class PaymentMethodsPage extends StatelessWidget {
+  const PaymentMethodsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order history'),
+        title: const Text('Payment Methods'),
       ),
       body: Center(
         child: ElevatedButton(

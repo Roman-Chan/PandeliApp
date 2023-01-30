@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-class Pay extends StatelessWidget {
-  const Pay({super.key});
+class InfoOrderPage extends StatelessWidget {
+  const InfoOrderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pay'),
+        title: const Text('Order information'),
       ),
       body: Center(
-        child : Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/third');
+                Navigator.pushNamed(context, '/ninth');
               },
-              child: const Text('Finish'),
+              child: const Text('Pago'),
             ),
           ],
         ),
