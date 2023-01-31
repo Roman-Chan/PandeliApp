@@ -38,8 +38,8 @@ class _MenuPageState extends State<MenuPage> {
       bottomNavigationBar: BottomNavigationBar(
         elevation: 10,
         backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-        unselectedItemColor: Theme.of(context).colorScheme.tertiary,
-        selectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
+        unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
+        selectedItemColor: const Color(0xFFC26B00),
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,
         items: const [
