@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             const SizedBox(height: 40.0),
             Column(
-              children:const[
+              children: const [
                 Logo(),
               ],
             ),
@@ -30,13 +30,15 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20.0),
             const Label(text: 'Email'),
             const BtnFgPassword(),
-            const ButtonForm(text: 'Login',functionOnPressed: screenChange),
+            const ButtonForm(text: 'Login', functionOnPressed: screenChange),
             const ButtonPassword(),
-            const SizedBox(height:170.0),
-            const OpcionBelow(text: '¿Nuevo usuario?', textButton: 'Registrate',
-            pressBelow: screenChangeR)
+            const SizedBox(height: 170.0),
+            const OpcionBelow(
+              text: '¿Nuevo usuario?',
+              textButton: 'Registrate',
+              pressBelow: screenChangeR,
+            )
           ],
-          
         ),
       ),
     );
@@ -44,11 +46,11 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 void screenChange(BuildContext context) {
-  Navigator.pushNamed(context, '/third');
+  Navigator.pushNamed(context, '/home');
 }
 
 void screenChangeR(BuildContext context) {
-  Navigator.pushNamed(context, '/second');
+  Navigator.pushNamed(context, '/signup');
 }
 
 class BtnFgPassword extends StatelessWidget {
@@ -59,19 +61,19 @@ class BtnFgPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0 ),
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0),
       child: Column(
         children: [
           SizedBox(
             child: TextField(
               decoration: InputDecoration(
-                filled:  true,
+                filled: true,
                 fillColor: Colors.white,
                 labelText: 'Contraseña',
                 labelStyle: const TextStyle(color: Colors.black),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide.none
+                  borderSide: BorderSide.none,
                 ),
               ),
               obscureText: true,
@@ -91,13 +93,13 @@ class ButtonPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right:20.0),
+      padding: const EdgeInsets.only(right: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           TextButton(
-          onPressed: () {},
-          child: const Text('Olvide mi contraseña'),
+            onPressed: () {},
+            child: const Text('Olvide mi contraseña'),
           ),
         ],
       ),
@@ -114,7 +116,7 @@ class Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipOval(
       child: Image.asset(
-        'assets/logo.jpeg',
+        'images/logo.jpeg',
         width: 200,
         height: 200,
         fit: BoxFit.cover,
