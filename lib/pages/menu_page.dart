@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/pages/account_page.dart';
 import 'package:pandeli_app/pages/make_order_page.dart';
-import 'package:pandeli_app/pages/orders_page.dart';
+import 'package:pandeli_app/pages/list_view_orders.dart';
+/* import 'package:pandeli_app/pages/orders_page.dart'; */
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -14,7 +15,8 @@ class _MenuPageState extends State<MenuPage> {
   int _selectedIndex = 1;
 
   static const List<Widget> _pageOptions = <Widget>[
-    OrdersPage(),
+   /*  OrdersPage(), */
+   ListViewOrders(),
     MakeOrderPage(),
     AccountPage()
   ];
