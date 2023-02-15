@@ -1,4 +1,12 @@
+
 import 'package:flutter/material.dart';
+
+void screenChangeProfile(BuildContext context) {
+  Navigator.pushNamed(context, '/info_profile');
+}
+void screenChangePayment(BuildContext context) {
+  Navigator.pushNamed(context, '/payment');
+}
 
 const _backgroundColor = Color(0xff0F3DDE1);
 const _Color = Color(0xff0a1356b);
@@ -25,22 +33,26 @@ class AccountPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 13),
               // ignore: prefer_const_literals_to_create_immutables
               children: <Widget>[
-                Card(  
+                Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
-                  child: const ListTile(
-                    title: Text("Informacion de perfil"),
-                    leading: Icon(Icons.person),
-                    trailing: Icon(Icons.navigate_next),
+                  child:  ListTile(
+                    title:const  Text("Informacion de perfil"),
+                    leading: const Icon(Icons.person),
+                    trailing: const Icon(Icons.navigate_next),
+                    onTap: () {
+                      screenChangeProfile(context);
+                    },
                   ),
                 ),
                 Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
-                  child: const ListTile(
-                    title: Text("Metodo de pago"),
-                    leading: Icon(Icons.credit_card),
-                    trailing: Icon(Icons.navigate_next),
+                  child:  ListTile(
+                    title: const Text("Metodo de pago"),
+                    leading: const Icon(Icons.credit_card),
+                    trailing: const Icon(Icons.navigate_next),
+                    onTap: () {screenChangePayment(context);},
                   ),
                 ),
               ],
