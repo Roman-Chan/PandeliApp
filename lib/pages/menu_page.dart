@@ -16,7 +16,7 @@ class _MenuPageState extends State<MenuPage> {
 
   static const List<Widget> _pageOptions = <Widget>[
    /*  OrdersPage(), */
-   ListViewOrders(),
+    ListViewOrders(),
     MakeOrderPage(),
     AccountPage()
   ];

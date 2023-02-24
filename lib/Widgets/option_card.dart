@@ -12,7 +12,8 @@ class OptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double widthAndHeight = 100;
+    var orientation = MediaQuery.of(context).orientation;
+    double widthAndHeight = orientation == Orientation.portrait ? 100 : 120;
     const double raidius = 10;
 
     return Card(
@@ -28,7 +29,7 @@ class OptionCard extends StatelessWidget {
               child: FadeInImage.assetNetwork(
                 placeholder: "images/loading.gif",
                 image: imageUrl,
-                width: widthAndHeight,
+                width: double.infinity,
                 height: widthAndHeight,
                 fit: BoxFit.cover,
               ),

@@ -15,6 +15,8 @@ class MakeOrderPage extends StatelessWidget {
       "https://cdn.pixabay.com/photo/2016/11/22/18/52/cake-1850011_640.jpg"
     ];
 
+    var orientation = MediaQuery.of(context).orientation;
+
     return Scaffold(
       // backgroundColor: Theme.of(context).colorScheme.background,
       body: Column(
@@ -26,8 +28,8 @@ class MakeOrderPage extends StatelessWidget {
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(12),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
               ),
