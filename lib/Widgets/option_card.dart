@@ -5,15 +5,18 @@ class OptionCard extends StatelessWidget {
     Key? key,
     required this.imageUrl,
     required this.title,
+    required this.price,
   }) : super(key: key);
 
   final String imageUrl;
   final String title;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
     var orientation = MediaQuery.of(context).orientation;
     double widthAndHeight = orientation == Orientation.portrait ? 100 : 120;
+    double widthContainerText = orientation == Orientation.portrait ? 70 : 100;
     const double raidius = 10;
 
     return Card(
@@ -21,7 +24,7 @@ class OptionCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ClipRRect(
@@ -35,16 +38,39 @@ class OptionCard extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyLarge?.merge(
-                    TextStyle(
-                      color:
-                          Theme.of(context).colorScheme.onTertiaryContainer,
-                    ),
-                  ),
-              textAlign: TextAlign.center,
+            const Divider(
+              height: 10,
             ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                SizedBox(
+                  width: widthContainerText,
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodyLarge?.merge(
+                          TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onTertiaryContainer,
+                          ),
+                        ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  '\$$price',
+                  style: Theme.of(context).textTheme.bodyLarge?.merge(
+                        TextStyle(
+                          color:
+                              Theme.of(context).colorScheme.onTertiaryContainer,
+                        ),
+                      ),
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            )
           ],
         ),
       ),
