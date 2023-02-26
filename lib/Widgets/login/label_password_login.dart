@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Label extends StatelessWidget {
-  final String text;
+class BtnFgPassword extends StatelessWidget {
   final TextEditingController controller;
-  const Label({super.key, required this.text,
-  required this.controller});
+  const BtnFgPassword({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +16,14 @@ class Label extends StatelessWidget {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                labelText: text,
-                labelStyle: const TextStyle(
-                  color: Colors.black,
-                ),
+                labelText: 'Contraseña',
+                labelStyle: const TextStyle(color: Colors.black),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                    borderSide: BorderSide.none),
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide.none,
+                ),
               ),
+              obscureText: true,
             ),
           ),
         ],
