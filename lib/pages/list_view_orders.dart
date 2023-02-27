@@ -2,6 +2,7 @@
 import 'package:pandeli_app/data/repositories/orders_data.dart';
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/core/entities/orders.dart';
+import 'package:flutter/cupertino.dart';
 
 class ListViewOrders extends StatelessWidget {
   const ListViewOrders({super.key});
@@ -14,6 +15,7 @@ class ListViewOrders extends StatelessWidget {
           itemCount: orders.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
+              color: Colors.white,
               child: CreateListOrders(context, orders[index]),
               elevation: 5.0,
               shape: RoundedRectangleBorder(
@@ -23,7 +25,14 @@ class ListViewOrders extends StatelessWidget {
     );
   }
 
-  CreateListOrders(BuildContext context, Orders orders) => ListTile(
+  CreateListOrders(BuildContext context, Orders orders) =>
+      /* onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const InfoOrderPage()),
+          );
+        }, */
+      ListTile(
         leading: CreateTrailingItem(orders),
         title: Text(
           orders.name,
@@ -37,19 +46,77 @@ class ListViewOrders extends StatelessWidget {
           Text('Sabor: ${orders.flavor}'),
           Text('Fecha: ${orders.ordenday}'),
           /* Text(
-            'Estado: ${orders.status}',
-            style: TextStyle(
-                color: orders.status == 'En proceso'
-                    ? Colors.orange
-                    : Colors.green),
-          ), */
+              'Estado: ${orders.status}',
+              style: TextStyle(
+                  color: orders.status == 'En proceso'
+                      ? Colors.orange
+                      : Colors.green),
+            ), */
         ]),
-
-        /*    subtitle: Text(orders.size),*/
         trailing:
             Text(orders.status, style: const TextStyle(color: Colors.green)),
-        onTap: () {},
+        onTap: () => DisplayInfOrders(context, orders),
       );
+
+  DisplayInfOrders(BuildContext context, Orders orders) => showCupertinoDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            elevation: 15,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            title: const Center(child: Text("Informacion Pedido")),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Nombre: ",
+                        style: TextStyle(
+                          fontWeight:
+                              FontWeight.bold, // establece la letra en negrita
+                        ),
+                      ),
+                      Text(orders.name),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  SizedBox(
+                    height: 200,
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'images/loading.gif',
+                      image: orders.urlPedido,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text("Tamaño: ${orders.size}"),
+                  Text("Sabor: ${orders.flavor}"),
+                  Text("Compra: ${orders.status}"),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  )),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("OK"),
+              ),
+            ],
+          ));
 
   FadeInImage CreateTrailingItem(Orders orders) {
     return FadeInImage.assetNetwork(

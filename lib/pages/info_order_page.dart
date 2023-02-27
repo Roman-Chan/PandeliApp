@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
+
+
 class InfoOrderPage extends StatelessWidget {
   const InfoOrderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Order information'),
+        appBar: AppBar(
+        title: const Text('Pay'),
       ),
       body: Center(
         child: Column(
@@ -15,9 +17,9 @@ class InfoOrderPage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/ninth');
+                Navigator.pushNamed(context, '/third');
               },
-              child: const Text('Pago'),
+              child: const Text('Finish'),
             ),
           ],
         ),
@@ -25,3 +27,4 @@ class InfoOrderPage extends StatelessWidget {
     );
   }
 }
+
