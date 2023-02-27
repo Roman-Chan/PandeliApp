@@ -28,10 +28,10 @@ class RegisterPage extends StatelessWidget {
                 SizedBox(
                   height: 30.0,
                 ),
-                Label(text: 'Nombre completo'),
-                Label(text: 'Numero de teléfono'),
-                Label(text: 'Correo electronico'),
-                Label(text: 'Contraseña'),
+              //  Label(text: 'Nombre completo'),
+               // Label(text: 'Numero de teléfono'),
+                //Label(text: 'Correo electronico'),
+                //Label(text: 'Contraseña'),
                 ButtonForm(
                     text: 'Registrarse', functionOnPressed: changeScreen),
                 OpcionBelow(

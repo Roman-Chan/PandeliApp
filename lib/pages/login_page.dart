@@ -1,126 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/widgets/button_form.dart';
-import 'package:pandeli_app/widgets/label.dart';
-import 'package:pandeli_app/widgets/nav.dart';
-import 'package:pandeli_app/widgets/option.below.dart';
+import 'package:pandeli_app/Widgets/button_form.dart';
+import 'package:pandeli_app/Widgets/label.dart';
+import 'package:pandeli_app/Widgets/login/forgot_password.dart';
+import 'package:pandeli_app/Widgets/login/label_password_login.dart';
+import 'package:pandeli_app/Widgets/login/logo_login.dart';
+import 'package:pandeli_app/Widgets/nav.dart';
+import 'package:pandeli_app/Widgets/option.below.dart';
+import 'package:pandeli_app/dtos/providers/login_providers.dart';
+import 'package:pandeli_app/dtos/providers/token_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({
+    super.key,
+  });
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+  
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String _errorMessage = '';
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFb0f2c2),
       body: SafeArea(
-        child: ListView(
-          children: <Widget>[
-            const SizedBox(height: 40.0),
-            Column(
-              children: const [
-                Logo(),
+        child: Consumer<LoginProvider>(
+          builder: (context, loginProvider, child) {
+            return ListView(
+              children: <Widget>[
+                const SizedBox(height: 40.0),
+                Column(
+                  children: const [
+                    Logo(),
+                  ],
+                ),
+                const SizedBox(height: 40.0),
+                Label(text: 'Email', controller: _emailController),
+                BtnFgPassword(controller: _passwordController),
+                ButtonForm(text: 'Login', functionOnPressed: autentification),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(_errorMessage,
+                      style: const TextStyle(color: Colors.red)),
+                ),
+                const ButtonPassword(),
+                const SizedBox(height: 170.0),
+                const OpcionBelow(
+                  text: '¿Nuevo usuario?',
+                  textButton: 'Registrate',
+                  pressBelow: screenChangeR,
+                ),
               ],
-            ),
-            const SizedBox(height: 50.0),
-            const NavBar(),
-            const SizedBox(height: 20.0),
-            const Label(text: 'Email'),
-            const BtnFgPassword(),
-            const ButtonForm(text: 'Login', functionOnPressed: screenChange),
-            const ButtonPassword(),
-            const SizedBox(height: 170.0),
-            const OpcionBelow(
-              text: '¿Nuevo usuario?',
-              textButton: 'Registrate',
-              pressBelow: screenChangeR,
-            )
-          ],
+            );
+          },
         ),
       ),
     );
   }
-}
 
-void screenChange(BuildContext context) {
-  Navigator.pushNamed(context, '/home');
+  void autentification(BuildContext context){
+    setState(() {
+    _errorMessage = ''; });
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    Provider.of<LoginProvider>(context, listen: false)
+      .login(email, password)
+      .then((success) {
+    if (success) {
+      Navigator.pushNamed(context, '/home');
+    } else {
+        setState(() {
+          _errorMessage = 'Error: usuario o contraseña incorrectos';
+        });
+      }
+    }).catchError((error) {
+      setState(() {
+        _errorMessage = error.toString().replaceFirst('Exception:', '');
+      });
+    });
+  }
 }
 
 void screenChangeR(BuildContext context) {
   Navigator.pushNamed(context, '/signup');
-}
-
-class BtnFgPassword extends StatelessWidget {
-  const BtnFgPassword({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0),
-      child: Column(
-        children: [
-          SizedBox(
-            child: TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                labelText: 'Contraseña',
-                labelStyle: const TextStyle(color: Colors.black),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-              obscureText: true,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ButtonPassword extends StatelessWidget {
-  const ButtonPassword({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          TextButton(
-            onPressed: () {},
-            child: const Text('Olvide mi contraseña'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Logo extends StatelessWidget {
-  const Logo({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-      child: Image.asset(
-        'images/logo.jpeg',
-        width: 200,
-        height: 200,
-        fit: BoxFit.cover,
-      ),
-    );
-  }
 }

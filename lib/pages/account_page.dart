@@ -1,5 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/pages/payment_page.dart';
+
+void screenChangeProfile(BuildContext context) {
+  Navigator.pushNamed(context, '/info_profile');
+}
+void screenChangePayment(BuildContext context) {
+  Navigator.pushNamed(context, '/payment');
+}
 
 const _backgroundColor = Color(0xff0F3DDE1);
 const _Color = Color(0xff0a1356b);
