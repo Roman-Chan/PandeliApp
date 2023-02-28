@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/Widgets/option_card.dart';
 import 'package:pandeli_app/Widgets/title_section.dart';
-import 'package:pandeli_app/providers/sizes_provider.dart';
+import 'package:pandeli_app/dtos/providers/sizes_provider.dart';
 import 'package:provider/provider.dart';
 
 class WidthSection extends StatelessWidget {

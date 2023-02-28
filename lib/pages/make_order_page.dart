@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/Widgets/option_design.dart';
 import 'package:pandeli_app/Widgets/title_section.dart';
-import 'package:pandeli_app/providers/designs_provider.dart';
+import 'package:pandeli_app/dtos/providers/designs_provider.dart';
 import 'package:provider/provider.dart';
 
 class MakeOrderPage extends StatelessWidget {

@@ -3,11 +3,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import 'package:pandeli_app/dtos/providers/token_provider.dart';
 import 'package:pandeli_app/dtos/response/size_response_dto.dart';
+import 'package:pandeli_app/services/base_uri.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SizesProvider extends ChangeNotifier {
   bool isLoading = true;
   bool isError = false;
+
+  Future getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final tokenProvider = TokenProvider(prefs).getToken();
+    return tokenProvider;
+  }
 
   final logger = Logger();
 
@@ -16,15 +26,12 @@ class SizesProvider extends ChangeNotifier {
 
   Future fetchSizes() async {
     try {
-      const String token =
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkYWEyNWU0YWQ5MjY2ZjdmMGIyNyIsImlhdCI6MTY3NzM3MzY0MSwiZXhwIjoxNjc3NDYwMDQxfQ.CMhm6sUKmt1lyf4yUM3i2WxXt1RQQOMWojSC4Ng20Fk';
-
-      // logger.d(Uri.parse('http://192.168.100.10:3000/api/cakedesigns'));
+      final token = await getToken();
 
       final response = await http.get(
-        Uri.parse('http://192.168.100.10:3000/api/breadsizes'),
+        Uri.parse('$baseUrl/api/breadsizes?page=1'),
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': '$token',
         },
       );
 
@@ -34,8 +41,7 @@ class SizesProvider extends ChangeNotifier {
         final json = jsonDecode(response.body);
         final List<dynamic> data = json;
 
-        _sizes =
-            data.map((design) => SizeResponseDto.fromMap(design)).toList();
+        _sizes = data.map((design) => SizeResponseDto.fromMap(design)).toList();
         isLoading = false;
         isError = false;
 
