@@ -36,15 +36,15 @@ class ViewProfile extends StatelessWidget {
                       height: 10,
                     ),
                     InputInfo(
-                      text: 'Apellido',
-                      value:infoProvider.user?.lastname ?? '' ,
+                      text: 'name',
+                      value:infoProvider.user?.name  ?? '' ,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     InputInfo(
                       text: 'Apellido',
-                      value: infoProvider.user?.email ?? '',
+                      value: infoProvider.user?.lastname ?? '',
                     ),
                     const SizedBox(
                       height: 10,
