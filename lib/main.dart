@@ -8,7 +8,7 @@ import 'package:pandeli_app/pages/info_profile_page.dart';
 import 'package:pandeli_app/pages/login_page.dart';
 import 'package:pandeli_app/pages/options_page.dart';
 import 'package:pandeli_app/pages/list_view_orders.dart';
-/* import 'package:pandeli_app/pages/orders_page.dart'; */
+
 import 'package:provider/provider.dart';
 import 'package:pandeli_app/pages/payment_page.dart';
 import 'package:pandeli_app/pages/payment_methods_page.dart';

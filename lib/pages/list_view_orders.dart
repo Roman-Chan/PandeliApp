@@ -26,12 +26,6 @@ class ListViewOrders extends StatelessWidget {
   }
 
   CreateListOrders(BuildContext context, Orders orders) =>
-      /* onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const InfoOrderPage()),
-          );
-        }, */
       ListTile(
         leading: CreateTrailingItem(orders),
         title: Text(
@@ -44,7 +38,9 @@ class ListViewOrders extends StatelessWidget {
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text('Tamaño: ${orders.size}'),
           Text('Sabor: ${orders.flavor}'),
+          Text("Relleno: ${orders.stuffing}"),
           Text('Fecha: ${orders.ordenday}'),
+          
           /* Text(
               'Estado: ${orders.status}',
               style: TextStyle(
@@ -99,6 +95,7 @@ class ListViewOrders extends StatelessWidget {
                   Text("Tamaño: ${orders.size}"),
                   Text("Sabor: ${orders.flavor}"),
                   Text("Compra: ${orders.status}"),
+                  Text("Relleno: ${orders.stuffing}"),
                 ],
               ),
             ),
