@@ -7,6 +7,7 @@ import 'package:pandeli_app/services/base_uri.dart';
 class RegisterProvider extends ChangeNotifier {
   late SharedPreferences _prefs;
   Future<bool> register(name,lastName,email, password) async {
+    
     _prefs = await SharedPreferences.getInstance();
     final url = Uri.parse('$baseUrl/api/signup');
       final response = await http.post(url, body: {
@@ -14,10 +15,13 @@ class RegisterProvider extends ChangeNotifier {
         'lastName': lastName,
         'email': email,
         'password': password,
+        
       });
       if (response.statusCode == 200) {
-        final token = json.decode(response.body);
+        
+        final token = json.decode(response.body)['token'];
         _prefs.setString('bearer','bearer $token');
+        print(token);
         return true;
       } else {
         final errorMessage = json.decode(response.body)['message'];

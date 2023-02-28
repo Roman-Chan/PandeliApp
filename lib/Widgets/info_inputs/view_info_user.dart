@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/Widgets/info_inputs/button_save.dart';
 import 'package:pandeli_app/Widgets/info_inputs/inputs_info_user.dart';
+import 'package:pandeli_app/dtos/providers/info_provider.dart';
+import 'package:provider/provider.dart';
 
 class ViewProfile extends StatelessWidget {
   const ViewProfile({
@@ -18,41 +20,48 @@ class ViewProfile extends StatelessWidget {
             color: Colors.white, // Agregar color de fondo
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Column(
+          child: Consumer<InfoProvider>(builder:((context, infoProvider, child) => 
+          Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
-                  children: const [
-                    SizedBox(height: 20),
+                  children: [
+                    const SizedBox(height: 20),
                     InputInfo(
-                      text: 'Nombre',
-                    ),
-                    SizedBox(
+                    text: 'Correo',
+                    value: infoProvider.user?.email ?? '',
+                  ),
+                    const SizedBox(
                       height: 10,
                     ),
                     InputInfo(
                       text: 'Apellido',
+                      value:infoProvider.user?.lastname ?? '' ,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     InputInfo(
-                      text: 'Correo',
+                      text: 'Apellido',
+                      value: infoProvider.user?.email ?? '',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    InputInfo(
+                    const InputInfo(
                       text: 'Número de telefono',
+                      value:  '',
                     ),
-                    SizedBox(width: 50),
-                    ButtonSave()
+                    const SizedBox(width: 50),
+                    const ButtonSave()
                   ],
                 ),
               )
             ],
-          ),
+          )
+        
+        ) )
         ));
   }
 }

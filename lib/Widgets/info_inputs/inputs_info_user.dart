@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class InputInfo extends StatelessWidget {
   final String text;
-  const InputInfo({super.key, required this.text});
+  final String value;
+  const InputInfo({super.key, required this.text, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class InputInfo extends StatelessWidget {
             decoration: InputDecoration(
               filled: true,
               labelText: text,
+              hintText: value,
               fillColor: Colors.white,
               labelStyle:const  TextStyle(
                 color: Colors.black,

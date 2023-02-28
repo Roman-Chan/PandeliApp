@@ -9,8 +9,15 @@ class TokenProvider {
     return _prefs.getString('bearer') ?? '';
   }
 
+   String getid() {
+    return _prefs.getString('id') ?? '';
+  }
+
   void setToken(String token) {
-    _prefs.setString('bearer',token);
+    _prefs.setString('bearer','bearer $token');
+  }
+  void setId(String id) {
+    _prefs.setString('id',id);
   }
 
   void removeToken() {
