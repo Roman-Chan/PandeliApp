@@ -12,8 +12,8 @@ class TitleSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 20,
+        vertical: 10,
+        horizontal: 10,
       ),
       child: Card(
         color: Theme.of(context).colorScheme.primary,

@@ -4,10 +4,8 @@ import 'package:pandeli_app/Widgets/label.dart';
 import 'package:pandeli_app/Widgets/login/forgot_password.dart';
 import 'package:pandeli_app/Widgets/login/label_password_login.dart';
 import 'package:pandeli_app/Widgets/login/logo_login.dart';
-import 'package:pandeli_app/Widgets/nav.dart';
 import 'package:pandeli_app/Widgets/option.below.dart';
 import 'package:pandeli_app/dtos/providers/login_providers.dart';
-import 'package:pandeli_app/dtos/providers/token_provider.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {

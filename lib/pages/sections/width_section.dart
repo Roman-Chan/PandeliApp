@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/Widgets/option_card_offline.dart';
+import 'package:pandeli_app/Widgets/option_card.dart';
 import 'package:pandeli_app/Widgets/title_section.dart';
+import 'package:pandeli_app/dtos/providers/sizes_provider.dart';
+import 'package:provider/provider.dart';
 
 class WidthSection extends StatelessWidget {
   final PageController pageController;
@@ -9,27 +11,40 @@ class WidthSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var orientation = MediaQuery.of(context).orientation;
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Column(
           children: [
             const TitleSection(title: "Tamaño"),
-            Expanded(
-              child: GridView.builder(
-                padding: const EdgeInsets.all(12),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return OptionCardOffline(
-                      imageUrl: "images/medida-${(index + 1)}.png",
-                      title: "${20 + (5 * index)} cm");
-                },
-              ),
+            Consumer<SizesProvider>(
+              builder: (context, sizesProvider, child) => sizesProvider
+                      .isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Expanded(
+                      child: GridView.builder(
+                        padding: const EdgeInsets.all(12),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              orientation == Orientation.portrait ? 2 : 4,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 0.80,
+                        ),
+                        itemCount: sizesProvider.sizes?.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final size = sizesProvider.sizes![index];
+
+                          return OptionCard(
+                            imageUrl: size.imgUrl,
+                            title: size.size,
+                            price: size.price.toString(),
+                          );
+                        },
+                      ),
+                    ),
             ),
             ElevatedButton(
               onPressed: () {
