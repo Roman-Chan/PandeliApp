@@ -29,7 +29,7 @@ class StuffingsProvider extends ChangeNotifier {
       final token = await getToken();
 
       final response = await http.get(
-        Uri.parse('$baseUrl/api/stuffings?page=1'),
+        Uri.parse('$baseUrl/api/stuffings/1'),
         headers: {
           'Authorization': '$token',
         },
@@ -39,7 +39,7 @@ class StuffingsProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
-        final List<dynamic> data = json;
+        final List<dynamic> data = json['stuffings']['docs'];
 
         _stuffings =
             data.map((design) => StuffingResponseDto.fromMap(design)).toList();

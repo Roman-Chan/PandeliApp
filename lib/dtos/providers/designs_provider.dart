@@ -29,7 +29,7 @@ class DesignsProvider extends ChangeNotifier {
       final token = await getToken();
 
       final response = await http.get(
-        Uri.parse('$baseUrl/api/cakedesigns?page=1'),
+        Uri.parse('$baseUrl/api/cakedesigns/1'),
         headers: {
           'Authorization': '$token',
         },
@@ -39,7 +39,7 @@ class DesignsProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
-        final List<dynamic> data = json;
+        final List<dynamic> data = json['cakeDesigns']['docs'];
 
         _designs =
             data.map((design) => DesignResponseDto.fromMap(design)).toList();

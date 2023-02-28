@@ -29,17 +29,19 @@ class SizesProvider extends ChangeNotifier {
       final token = await getToken();
 
       final response = await http.get(
-        Uri.parse('$baseUrl/api/breadsizes?page=1'),
+        Uri.parse('$baseUrl/api/breadsizes/1'),
         headers: {
           'Authorization': '$token',
         },
       );
 
+      logger.d(Uri.parse('$baseUrl/api/breadsizes/1'));
+
       logger.d(response.body);
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
-        final List<dynamic> data = json;
+        final List<dynamic> data = json['breadSizes']['docs'];
 
         _sizes = data.map((design) => SizeResponseDto.fromMap(design)).toList();
         isLoading = false;
