@@ -29,7 +29,7 @@ class FlavorsProvider extends ChangeNotifier {
       final token = await getToken();
 
       final response = await http.get(
-        Uri.parse('$baseUrl/api/breadflavors?page=1'),
+        Uri.parse('$baseUrl/api/breadflavors/1'),
         headers: {
           'Authorization': '$token',
         },
@@ -39,7 +39,7 @@ class FlavorsProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
-        final List<dynamic> data = json;
+        final List<dynamic> data = json['breadFlavors']['docs'];
 
         _flavors =
             data.map((design) => FlavorResponseDto.fromMap(design)).toList();

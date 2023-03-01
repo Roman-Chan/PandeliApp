@@ -1,5 +1,6 @@
 /* MATERIAL */
 import 'package:flutter/material.dart';
+import 'package:pandeli_app/dtos/providers/orders_provider.dart';
 /* PUBS */
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,6 +42,8 @@ void main() async {
             create: (context) => StuffingsProvider()..fetchStuffings()),
         ChangeNotifierProvider<SizesProvider>(
             create: (context) => SizesProvider()..fetchSizes()),
+        ChangeNotifierProvider<OrdersProvider>(
+            create: (context) => OrdersProvider()..fetchOrders()),
       ],
       child: const MyApp(),
     ),
