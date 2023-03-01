@@ -17,8 +17,8 @@ class FlavorSection extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
+          // mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisSize: MainAxisSize.max,
           children: [
             const TitleSection(title: "Sabor"),
             Consumer<FlavorsProvider>(

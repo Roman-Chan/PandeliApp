@@ -35,6 +35,8 @@ class SizesProvider extends ChangeNotifier {
         },
       );
 
+      logger.d(Uri.parse('$baseUrl/api/breadsizes/1'));
+
       logger.d(response.body);
 
       if (response.statusCode == 200) {

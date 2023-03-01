@@ -1,6 +1,8 @@
 /* MATERIAL */
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/dtos/providers/orders_provider.dart';
+import 'package:pandeli_app/dtos/providers/info_provider.dart';
+import 'package:pandeli_app/dtos/providers/register_provider.dart';
 /* PUBS */
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +36,9 @@ void main() async {
       providers: [
         Provider<TokenProvider>(create: (_) => TokenProvider(prefs)),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ChangeNotifierProvider<RegisterProvider>(create: (_) => RegisterProvider()),
+        ChangeNotifierProvider<InfoProvider>(
+            create: (context) => InfoProvider()..fetchUser()),
         ChangeNotifierProvider<DesignsProvider>(
             create: (context) => DesignsProvider()..fetchDesigns()),
         ChangeNotifierProvider<FlavorsProvider>(
@@ -66,7 +71,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginPage(),
-        '/signup': (context) => const RegisterPage(),
+        '/signup': (context) =>  const RegisterPage(),
         '/home': (context) => const MenuPage(),
         '/options': (context) => const OptionsPage(),
         /* '/orders': (context) => const OrdersPage(), */
