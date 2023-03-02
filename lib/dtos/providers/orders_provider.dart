@@ -25,24 +25,29 @@ class OrdersProvider extends ChangeNotifier {
   
   Future fetchOrders() async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      final id = TokenProvider(prefs).getid();
+
       final token = await getToken();
       final response = await http.get(
-        Uri.parse('$baseUrl/api/order/1/1'),
+        Uri.parse('$baseUrl/api/order/$id/1'),
         headers: {
           'Authorization': '$token',
         },
       );
+      logger.d(id);
+      logger.d(Uri.parse('$baseUrl/api/order/$id/1'));
+
       logger.d(response.body);
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
-        final List<dynamic> data = json['order']['docs'];
+        final List<dynamic> data = json['selectedData'];
 
         _orders =
             data.map((design) => OrderResponseDto.fromMap(design)).toList();
         isLoading = false;
         isError = false;
-
         notifyListeners();
       } 
     } catch (e) {

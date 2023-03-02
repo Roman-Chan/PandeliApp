@@ -1,47 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/core/entities/orders.dart';
-import 'package:pandeli_app/data/repositories/orders_data.dart';
+import 'package:pandeli_app/dtos/response/orders_response_dto.dart';
+
 class InfoOrder extends StatelessWidget {
-   final Orders inf;
-  const InfoOrder({super.key, required this.inf});
+  final OrderResponseDto orden;
+  const InfoOrder({super.key, required this.orden});
 
   @override
   Widget build(BuildContext context) {
-    var inf = OrdersRepository.getOrders();
-    return Column(
-       children: [
-        InfOrden(context, inf[1])
-       ],
-    );
-  }
-
-
-   InfOrden(BuildContext context, Orders inf) => ListTile(
-        title: Center(
-          child: Text(
-            inf.name,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold, // establece la letra en negrita
+    const _Color = Color(0xff0a1356b);
+    const _backgroundColor = Color(0xff0F3DDE1);
+    return Scaffold(
+      backgroundColor: _backgroundColor,
+      appBar: AppBar(
+        title: const Text('Detalles del pedido'),
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(children: [
+            const SizedBox(
+              height: 15,
             ),
-          ),
+            Image.network(
+              orden.imgUrl,
+              fit: BoxFit.cover,
+              width: 250,
+              height: 250,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Text(
+              "Detalles del Pedido",
+              style: TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.bold, color: _Color),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: Card(  
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+                child: ListTile(
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Tamaño: ${orden.size}'),
+                      Text('Relleno: ${orden.stuffing}'),
+                      Text('Sabor: ${orden.flavor}'),
+                    ],
+                  ),
+                  trailing: Text("Precio:${orden.total.toString()}",
+                      style: const TextStyle(color: Colors.green)),
+                ),
+              ),
+            ),
+          ]),
         ),
-        leading: CreateTrailingItem(inf),
-        subtitle:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Tamaño: ${inf.size}'),
-          Text('Sabor: ${inf.flavor}'),
-          Text('Fecha: ${inf.ordenday}'),
-        ]),
-        trailing: Text(inf.status, style: const TextStyle(color: Colors.green)),
-      );
-
-
-  FadeInImage CreateTrailingItem(Orders inf) {
-    return FadeInImage.assetNetwork(
-      placeholder: 'images/loading.gif',
-      image: inf.urlPedido,
-      fit: BoxFit.cover,
-      height: double.infinity,
+      ),
     );
   }
 }

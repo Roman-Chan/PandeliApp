@@ -14,6 +14,7 @@ class LoginProvider extends ChangeNotifier {
         'email': email,
         'password': password,
       });
+      
       if (response.statusCode == 200) {
         final token = json.decode(response.body)['token'];
         final id = json.decode(response.body)['_id'];

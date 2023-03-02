@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-
-
-
 class InfoOrderPage extends StatelessWidget {
   const InfoOrderPage({super.key});
 

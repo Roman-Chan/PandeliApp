@@ -12,37 +12,45 @@ String orderResponseDtoToMap(OrderResponseDto data) =>
 
 class OrderResponseDto {
   OrderResponseDto({
-    required this.user,
-    required this.imgUrl,
-    required this.size,
-    required this.flavor,
-    required this.idStuffing,
-    required this.status,
+    required this.orderId,
+        required this.imgUrl,
+        required this.size,
+        required this.flavor,
+        required this.stuffing,
+        required this.total,
+        required this.status,
+        required this.orderDay,
   });
 
-  final String user;
-  final String imgUrl;
-  final String size;
-  final String flavor;
-  final String idStuffing;
-  final String status;
+  final String orderId;
+    final String imgUrl;
+    final String size;
+    final String flavor;
+    final String stuffing;
+    final int total;
+    final String status;
+    final String orderDay;
 
   factory OrderResponseDto.fromMap(Map<String, dynamic> json) =>
       OrderResponseDto(
-        user: json["user"],
+          orderId: json["orderId"],
         imgUrl: json["imgURL"],
         size: json["size"],
         flavor: json["flavor"],
-        idStuffing: json["id_stuffing"],
+        stuffing: json["stuffing"],
+        total: json["total"],
         status: json["status"],
+        orderDay: json["orderDay"],
       );
 
   Map<String, dynamic> toMap() => {
-        "user": user,
+        "orderId": orderId,
         "imgURL": imgUrl,
         "size": size,
         "flavor": flavor,
-        "id_stuffing": idStuffing,
+        "stuffing": stuffing,
+        "total": total,
         "status": status,
+        "orderDay": orderDay,
       };
 }

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:pandeli_app/pages/address_page.dart';
 import 'package:pandeli_app/pages/payment_page.dart';
 
 void screenChangeProfile(BuildContext context) {
@@ -58,6 +59,24 @@ class AccountPage extends StatelessWidget {
                     child: const ListTile(
                       title: Text("Metodo de pago"),
                       leading: Icon(Icons.credit_card),
+                      trailing: Icon(Icons.navigate_next),
+                    ),
+                  ),
+                ),
+                 InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddressPage()),
+                    );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    child: const ListTile(
+                      title: Text("Direcciones"),
+                      leading: Icon(Icons.directions),
                       trailing: Icon(Icons.navigate_next),
                     ),
                   ),
