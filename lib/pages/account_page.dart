@@ -32,20 +32,23 @@ class AccountPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric( horizontal: 13),
+              padding: const EdgeInsets.symmetric(horizontal: 13),
               children: <Widget>[
                 InkWell(
                   child: Card(
-                     margin: const EdgeInsets.only(bottom: 7),
+                    margin: const EdgeInsets.only(bottom: 7),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
-                    child: const ListTile(
-                      title: Text("Informacion de perfil"),
-                      leading: Icon(
+                    child: ListTile(
+                      title: const Text("Informacion de perfil"),
+                      leading: const Icon(
                         Icons.person,
                         color: Colors.blue,
                       ),
-                      trailing: Icon(Icons.navigate_next),
+                      trailing: const Icon(Icons.navigate_next),
+                      onTap: () {
+                        screenChangeProfile(context);
+                      },
                     ),
                   ),
                 ),
@@ -58,7 +61,7 @@ class AccountPage extends StatelessWidget {
                     );
                   },
                   child: Card(
-                     margin: const EdgeInsets.only(bottom: 7),
+                    margin: const EdgeInsets.only(bottom: 7),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
                     child: const ListTile(
@@ -80,7 +83,7 @@ class AccountPage extends StatelessWidget {
                     );
                   },
                   child: Card(
-                     margin: const EdgeInsets.only(bottom: 7),
+                    margin: const EdgeInsets.only(bottom: 7),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
                     child: const ListTile(
