@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/pages/address_page.dart';
 import 'package:pandeli_app/pages/payment_page.dart';
@@ -6,6 +5,7 @@ import 'package:pandeli_app/pages/payment_page.dart';
 void screenChangeProfile(BuildContext context) {
   Navigator.pushNamed(context, '/info_profile');
 }
+
 void screenChangePayment(BuildContext context) {
   Navigator.pushNamed(context, '/payment');
 }
@@ -25,22 +25,26 @@ class AccountPage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 15),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: const Text("Cuenta",
                 style: TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 18, color: _Color)),
           ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 13),
+              padding: const EdgeInsets.symmetric( horizontal: 13),
               children: <Widget>[
                 InkWell(
                   child: Card(
+                     margin: const EdgeInsets.only(bottom: 7),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
+                        borderRadius: BorderRadius.circular(6)),
                     child: const ListTile(
                       title: Text("Informacion de perfil"),
-                      leading: Icon(Icons.person),
+                      leading: Icon(
+                        Icons.person,
+                        color: Colors.blue,
+                      ),
                       trailing: Icon(Icons.navigate_next),
                     ),
                   ),
@@ -54,16 +58,20 @@ class AccountPage extends StatelessWidget {
                     );
                   },
                   child: Card(
+                     margin: const EdgeInsets.only(bottom: 7),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
+                        borderRadius: BorderRadius.circular(6)),
                     child: const ListTile(
                       title: Text("Metodo de pago"),
-                      leading: Icon(Icons.credit_card),
+                      leading: Icon(
+                        Icons.credit_card,
+                        color: Colors.green,
+                      ),
                       trailing: Icon(Icons.navigate_next),
                     ),
                   ),
                 ),
-                 InkWell(
+                InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -72,11 +80,15 @@ class AccountPage extends StatelessWidget {
                     );
                   },
                   child: Card(
+                     margin: const EdgeInsets.only(bottom: 7),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
+                        borderRadius: BorderRadius.circular(6)),
                     child: const ListTile(
                       title: Text("Direcciones"),
-                      leading: Icon(Icons.directions),
+                      leading: Icon(
+                        Icons.location_on,
+                        color: Colors.red,
+                      ),
                       trailing: Icon(Icons.navigate_next),
                     ),
                   ),

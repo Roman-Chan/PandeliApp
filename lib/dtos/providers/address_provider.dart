@@ -25,65 +25,67 @@ class AddressProvider extends ChangeNotifier {
   List<AddressResponseDto>? get address => _address;
 
   Future fetchAddress() async {
-  try {
-    final prefs = await SharedPreferences.getInstance();
-    final id = TokenProvider(prefs).getid();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final id = TokenProvider(prefs).getid();
 
-    final token = await getToken();
-    final response = await http.get(
-      Uri.parse('$baseUrl/api/addresses/$id'),
-      headers: {
-        'Authorization': '$token',
-      },
-    );
-    logger.d(id);
-    logger.d(Uri.parse('$baseUrl/api/addresses/$id'));
+      final token = await getToken();
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/addresses/$id'),
+        headers: {
+          'Authorization': '$token',
+        },
+      );
+      logger.d(id);
+      logger.d(Uri.parse('$baseUrl/api/addresses/$id'));
 
-    logger.d(response.body);
+      logger.d(response.body);
 
-    if (response.statusCode == 200) {
-      final List<dynamic> json = jsonDecode(response.body);
-      _address = json
-          .map(
-            (list) => AddressResponseDto(addresses: List<String>.from(list)),
-          )
-          .toList();
-      isLoading = false;
-      /*  isError = false; */
-      notifyListeners();
+      if (response.statusCode == 200) {
+        final List<dynamic> json = jsonDecode(response.body);
+        _address = json
+            .map(
+              (list) => AddressResponseDto(addresses: List<String>.from(list)),
+            )
+            .toList();
+        isLoading = false;
+        /*  isError = false; */
+        notifyListeners();
+      }
+    } catch (e) {
+      logger.d(e);
     }
-  } catch (e) {
-    logger.d(e);
   }
-}
 
-    /*METODO POST  */
-  Future createAddres(String address,BuildContext context) async {
+  /*METODO POST  */
+  Future createAddres(String address, BuildContext context) async {
     ///final addres = CreateAddressRequestDto(address: address);
     final prefs = await SharedPreferences.getInstance();
     final id = TokenProvider(prefs).getid();
     final url = Uri.parse('$baseUrl/api/address');
-      final responses = await http.post(url, body: {
-        'id':id,
-        'address': address
-      }, );
+    final responses = await http.post(
+      url,
+      body: {'id': id, 'address': address},
+    );
 
     if (responses.statusCode == 200) {
       logger.d('address created: ${responses.body}');
-       if (context.mounted) {
+      if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Direccion Añadida!')),
         );
+        fetchAddress();
         Navigator.pop(context);
       }
     } else {
-      logger.d(Uri.parse('$baseUrl/api/address/$id'));
+      /* logger.d(Uri.parse('$baseUrl/api/address/$id')); */
       logger.e('Error: ${responses.statusCode}');
-    /*   if (context.mounted) {
+        if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${response.statusCode}!')),
+          SnackBar(content: Text('Error: ${responses.statusCode}!')),
         );
-      } */
+      }
     }
   }
+    
 }

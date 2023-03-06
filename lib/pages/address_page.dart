@@ -18,7 +18,7 @@ class AddressPage extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(
-            height: 15,
+            height: 10,
           ),
           const Text(
             "Mis Direcciones",
@@ -42,7 +42,7 @@ class AddressPage extends StatelessWidget {
                       children: List.generate(
                         addressProvider.address!.length,
                         (i) => ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: addressProvider.address?[i].length ?? 0,
@@ -51,19 +51,22 @@ class AddressPage extends StatelessWidget {
                             final address =
                                 addressProvider.address?[i].addresses[index];
                             return Card(
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
+                              margin: const EdgeInsets.only(bottom: 5),
                               child: ListTile(
                                 title: Text(
                                   '$address',
                                   style: const TextStyle(
-                                    
                                     fontSize: 16,
                                   ),
                                 ),
-                                leading: const Icon(Icons.directions_outlined),
-                                trailing: const Icon(Icons.navigate_next),
+                                leading: const Icon(
+                                  Icons.directions_outlined,
+                                  color: Colors.blue,
+                                ),
+                                trailing: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
                               ),
                             );
                           },
@@ -75,6 +78,7 @@ class AddressPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
         onPressed: () {
           Navigator.push(
             context,
@@ -83,7 +87,10 @@ class AddressPage extends StatelessWidget {
             ),
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.blue,
+        ),
       ),
     );
   }
