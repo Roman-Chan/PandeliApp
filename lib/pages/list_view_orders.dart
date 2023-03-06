@@ -1,62 +1,84 @@
 // ignore_for_file: non_constant_identifier_names
-import 'package:pandeli_app/data/repositories/orders_data.dart';
+/* import 'package:pandeli_app/data/repositories/orders_data.dart'; */
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/core/entities/orders.dart';
+import 'package:pandeli_app/pages/sections/info_order.dart';
+import 'package:provider/provider.dart';
+import 'package:pandeli_app/dtos/providers/orders_provider.dart';
 
 class ListViewOrders extends StatelessWidget {
   const ListViewOrders({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var orders = OrdersRepository.getOrders();
+    const _Color = Color(0xff0a1356b);
+    const _backgroundColor = Color(0xff0F3DDE1);
+    /*  var orders = OrdersRepository.getOrders(); */
     return Scaffold(
-      body: ListView.builder(
-          itemCount: orders.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: CreateListOrders(context, orders[index]),
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            );
-          }),
-    );
-  }
-
-  CreateListOrders(BuildContext context, Orders orders) => ListTile(
-        leading: CreateTrailingItem(orders),
-        title: Text(
-          orders.name,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold, // establece la letra en negrita
-          ),
+      backgroundColor: _backgroundColor,
+      body: Column(children: [
+        const SizedBox(
+          height: 15,
         ),
-        subtitle:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Tamaño: ${orders.size}'),
-          Text('Sabor: ${orders.flavor}'),
-          Text('Fecha: ${orders.ordenday}'),
-          /* Text(
-            'Estado: ${orders.status}',
-            style: TextStyle(
-                color: orders.status == 'En proceso'
-                    ? Colors.orange
-                    : Colors.green),
-          ), */
-        ]),
+        const Text(
+          "Mis Pedidos",
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: _Color // establece la letra en negrita
+              ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Consumer<OrdersProvider>(
+          builder: (context, ordersProvider, child) => ordersProvider.isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Expanded(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 12),
+                      itemCount: ordersProvider.orders?.length,
+                      itemBuilder: (context, index) {
+                        final orden = ordersProvider.orders?[index];
 
-        /*    subtitle: Text(orders.size),*/
-        trailing:
-            Text(orders.status, style: const TextStyle(color: Colors.green)),
-        onTap: () {},
-      );
-
-  FadeInImage CreateTrailingItem(Orders orders) {
-    return FadeInImage.assetNetwork(
-      placeholder: 'images/loading.gif',
-      image: orders.urlPedido,
-      fit: BoxFit.cover,
-      height: double.infinity,
+                        return Card(
+                          child: ListTile(
+                            title: Text(
+                              orden!.flavor,
+                              style: const TextStyle(
+                                fontWeight: FontWeight
+                                    .bold, // establece la letra en negrita
+                              ),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Tamaño: ${orden.size}'),
+                                Text('Relleno: ${orden.stuffing}'),
+                                Text('Fecha: ${orden.orderDay}'),
+                                Text('Precio: ${orden.total}'),
+                              ],
+                            ),
+                            leading: FadeInImage.assetNetwork(
+                              placeholder: 'images/loading.gif',
+                              image: orden.imgUrl,
+                              fit: BoxFit.cover,
+                              height: double.infinity,
+                            ),
+                            trailing: Text(orden.status,
+                                style: const TextStyle(color: Colors.green)),
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        InfoOrder(orden: orden))),
+                          ),
+                        );
+                      })),
+        )
+      ]),
     );
   }
 }

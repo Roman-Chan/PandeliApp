@@ -1,9 +1,11 @@
-
 import 'package:flutter/material.dart';
+import 'package:pandeli_app/pages/address_page.dart';
+import 'package:pandeli_app/pages/payment_page.dart';
 
 void screenChangeProfile(BuildContext context) {
   Navigator.pushNamed(context, '/info_profile');
 }
+
 void screenChangePayment(BuildContext context) {
   Navigator.pushNamed(context, '/payment');
 }
@@ -23,36 +25,75 @@ class AccountPage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 15),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: const Text("Cuenta",
                 style: TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 18, color: _Color)),
           ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 13),
-              // ignore: prefer_const_literals_to_create_immutables
+              padding: const EdgeInsets.symmetric(horizontal: 13),
               children: <Widget>[
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  child:  ListTile(
-                    title:const  Text("Informacion de perfil"),
-                    leading: const Icon(Icons.person),
-                    trailing: const Icon(Icons.navigate_next),
-                    onTap: () {
-                      screenChangeProfile(context);
-                    },
+                InkWell(
+                  child: Card(
+                    margin: const EdgeInsets.only(bottom: 7),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6)),
+                    child: ListTile(
+                      title: const Text("Informacion de perfil"),
+                      leading: const Icon(
+                        Icons.person,
+                        color: Colors.blue,
+                      ),
+                      trailing: const Icon(Icons.navigate_next),
+                      onTap: () {
+                        screenChangeProfile(context);
+                      },
+                    ),
                   ),
                 ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  child:  ListTile(
-                    title: const Text("Metodo de pago"),
-                    leading: const Icon(Icons.credit_card),
-                    trailing: const Icon(Icons.navigate_next),
-                    onTap: () {screenChangePayment(context);},
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PaymentPage()),
+                    );
+                  },
+                  child: Card(
+                    margin: const EdgeInsets.only(bottom: 7),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6)),
+                    child: const ListTile(
+                      title: Text("Metodo de pago"),
+                      leading: Icon(
+                        Icons.credit_card,
+                        color: Colors.green,
+                      ),
+                      trailing: Icon(Icons.navigate_next),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddressPage()),
+                    );
+                  },
+                  child: Card(
+                    margin: const EdgeInsets.only(bottom: 7),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6)),
+                    child: const ListTile(
+                      title: Text("Direcciones"),
+                      leading: Icon(
+                        Icons.location_on,
+                        color: Colors.red,
+                      ),
+                      trailing: Icon(Icons.navigate_next),
+                    ),
                   ),
                 ),
               ],

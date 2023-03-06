@@ -1,5 +1,6 @@
 /* MATERIAL */
 import 'package:flutter/material.dart';
+import 'package:pandeli_app/dtos/providers/orders_provider.dart';
 import 'package:pandeli_app/dtos/providers/info_provider.dart';
 import 'package:pandeli_app/dtos/providers/order_provider.dart';
 import 'package:pandeli_app/dtos/providers/register_provider.dart';
@@ -14,6 +15,7 @@ import 'package:pandeli_app/dtos/providers/login_providers.dart';
 import 'package:pandeli_app/dtos/providers/sizes_provider.dart';
 import 'package:pandeli_app/dtos/providers/stuffings_provider.dart';
 import 'package:pandeli_app/dtos/providers/token_provider.dart';
+import 'package:pandeli_app/dtos/providers/address_provider.dart';
 /* PAGES */
 import 'package:pandeli_app/pages/account_page.dart';
 import 'package:pandeli_app/pages/info_order_page.dart';
@@ -50,6 +52,10 @@ void main() async {
             create: (context) => SizesProvider()..fetchSizes()),
         ChangeNotifierProvider<OrderProvider>(
             create: ((context) => OrderProvider())),
+        ChangeNotifierProvider<OrdersProvider>(
+            create: (context) => OrdersProvider()..fetchOrders()),
+        ChangeNotifierProvider<AddressProvider>(
+            create: (context) => AddressProvider()..fetchAddress())
       ],
       child: const MyApp(),
     ),
