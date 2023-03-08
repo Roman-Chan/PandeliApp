@@ -23,6 +23,10 @@ class TokenProvider {
   void removeToken() {
     _prefs.remove('bearer');
   }
+
+  void removeId(){
+    _prefs.remove('id');
+  }
 }
 
 

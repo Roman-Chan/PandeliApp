@@ -31,10 +31,11 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 1,
         shadowColor: Theme.of(context).colorScheme.outline,
         surfaceTintColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Home'),
+        title: Text(_selectedIndex == 1 ? 'Home' : _selectedIndex == 0 ? 'Orders' : 'Perfil'),
       ),
       body: _pageOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(

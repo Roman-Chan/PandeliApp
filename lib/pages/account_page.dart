@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/pages/address_page.dart';
 import 'package:pandeli_app/pages/payment_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../dtos/providers/token_provider.dart';
 
 void screenChangeProfile(BuildContext context) {
   Navigator.pushNamed(context, '/info_profile');
@@ -8,6 +11,17 @@ void screenChangeProfile(BuildContext context) {
 
 void screenChangePayment(BuildContext context) {
   Navigator.pushNamed(context, '/payment');
+}
+
+void cleanPreferences(BuildContext context)async{
+  final prefs = await SharedPreferences.getInstance();
+  final tokenProvider = TokenProvider(prefs);
+  tokenProvider.removeToken();
+  tokenProvider.removeId();
+}
+void screenChangeExit(BuildContext context) {
+  cleanPreferences(context);
+  Navigator.pushNamed(context, '/');
 }
 
 const _backgroundColor = Color(0xff0F3DDE1);
@@ -93,6 +107,25 @@ class AccountPage extends StatelessWidget {
                         color: Colors.red,
                       ),
                       trailing: Icon(Icons.navigate_next),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  child: Card(
+                    margin: const EdgeInsets.only(bottom: 7),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6)),
+                    child: ListTile(
+                      title: const Text("Salir"),
+                      leading: const Icon(
+                        Icons.exit_to_app,
+                        color: Colors.blue,
+                      ),
+                      //trailing: const Icon(Icons.exit_to_app),
+                      onTap: () {
+                        screenChangeExit(context)
+                        ;
+                      },
                     ),
                   ),
                 ),

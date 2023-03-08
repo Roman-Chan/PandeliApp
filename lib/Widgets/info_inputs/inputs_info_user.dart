@@ -7,14 +7,15 @@ class InputInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _controller = TextEditingController(text: value);
     return Column(
       children: [
         SizedBox(
           child: TextField(
+            controller:  _controller,
             decoration: InputDecoration(
               filled: true,
               labelText: text,
-              hintText: value,
               fillColor: Colors.white,
               labelStyle:const  TextStyle(
                 color: Colors.black,
