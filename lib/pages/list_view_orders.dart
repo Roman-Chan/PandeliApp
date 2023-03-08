@@ -47,7 +47,7 @@ class ListViewOrders extends StatelessWidget {
                         return Card(
                           child: ListTile(
                             title: Text(
-                              orden!.flavor,
+                              orden!.description,
                               style: const TextStyle(
                                 fontWeight: FontWeight
                                     .bold, // establece la letra en negrita
@@ -56,6 +56,7 @@ class ListViewOrders extends StatelessWidget {
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text('Sabor: ${orden.flavor}'),
                                 Text('Tamaño: ${orden.size}'),
                                 Text('Relleno: ${orden.stuffing}'),
                                 Text('Fecha: ${orden.orderDay}'),
@@ -94,33 +95,37 @@ class ListViewOrders extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            title: Text(orden.flavor),
+            title: Center(child: Text(orden.description)),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             content: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FadeInImage.assetNetwork(
-                  placeholder: 'images/loading.gif',
-                  image: orden.imgUrl,
-                  fit: BoxFit.cover,
-                  height: 200,
+                Container(
+                  alignment: Alignment.center,
+                  child: FadeInImage.assetNetwork(
+                    placeholder: 'images/loading.gif',
+                    image: orden.imgUrl,
+                    fit: BoxFit.cover,
+                    height: 200,
+                  ),
                 ),
-                Column(
+                const SizedBox(
+                  height: 10,
+                ),
+                Text('Tamaño: ${orden.size}'),
+                Text('Sabor: ${orden.flavor}'),
+                Text('Relleno: ${orden.stuffing}'),
+                Text('Fecha: ${orden.orderDay}'),
+                Text('Precio: ${orden.total}'),
+                Row(
                   children: [
-               
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const Text('Estatus: '),
                     Text(orden.status,
                         style: const TextStyle(color: Colors.green)),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text('Tamaño: ${orden.size}'),
-                    Text('Relleno: ${orden.stuffing}'),
-                    Text('Fecha: ${orden.orderDay}'),
-                    Text('Precio: ${orden.total}'),
                   ],
-                )
+                ),
               ],
             ),
             actions: [

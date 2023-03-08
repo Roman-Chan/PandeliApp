@@ -20,6 +20,7 @@ class OrderResponseDto {
         required this.total,
         required this.status,
         required this.orderDay,
+        required this.description,
   });
 
   final String orderId;
@@ -30,6 +31,7 @@ class OrderResponseDto {
     final int total;
     final String status;
     final String orderDay;
+    final String description;
 
   factory OrderResponseDto.fromMap(Map<String, dynamic> json) =>
       OrderResponseDto(
@@ -41,6 +43,7 @@ class OrderResponseDto {
         total: json["total"],
         status: json["status"],
         orderDay: json["orderDay"],
+        description: json ["description"]
       );
 
   Map<String, dynamic> toMap() => {
@@ -52,5 +55,6 @@ class OrderResponseDto {
         "total": total,
         "status": status,
         "orderDay": orderDay,
+        "description": description,
       };
 }
