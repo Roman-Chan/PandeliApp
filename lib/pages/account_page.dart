@@ -26,7 +26,7 @@ class AccountPage extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: const Text("Cuenta",
+            child: const Text("Detalles de cuenta",
                 style: TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 18, color: _Color)),
           ),

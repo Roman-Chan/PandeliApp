@@ -34,7 +34,7 @@ class _MenuPageState extends State<MenuPage> {
         elevation: 1,
         shadowColor: Theme.of(context).colorScheme.outline,
         surfaceTintColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Home'),
+        title: Text(_selectedIndex == 0 ? 'Orders' : _selectedIndex == 1 ? 'Home' : 'Cuenta' ),
       ),
       body: _pageOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -47,15 +47,15 @@ class _MenuPageState extends State<MenuPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.list_alt_sharp),
-            label: "Orders",
+            label: "Ordenes",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Home",
+            label: "Inicio",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: "Account",
+            label: "Cuenta",
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/dtos/response/orders_response_dto.dart';
 
@@ -56,7 +58,13 @@ class InfoOrder extends StatelessWidget {
                 ),
               ),
             ),
-          ]),
+            Padding(padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child: Card(
+            child: ListTile(title: Text(''),),
+            ), )
+          ]
+        
+          ),
         ),
       ),
     );

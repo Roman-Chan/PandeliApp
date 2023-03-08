@@ -1,7 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 /* import 'package:pandeli_app/data/repositories/orders_data.dart'; */
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/pages/sections/info_order.dart';
+/* import 'package:pandeli_app/pages/sections/info_order.dart'; */
+import 'package:pandeli_app/dtos/response/orders_response_dto.dart';
 import 'package:provider/provider.dart';
 import 'package:pandeli_app/dtos/providers/orders_provider.dart';
 
@@ -69,16 +70,68 @@ class ListViewOrders extends StatelessWidget {
                             ),
                             trailing: Text(orden.status,
                                 style: const TextStyle(color: Colors.green)),
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        InfoOrder(orden: orden))),
+                            onTap: () {
+                              detailsAlert(context, orden);
+                            },
                           ),
                         );
                       })),
         )
       ]),
+    );
+  }
+
+  Future<dynamic> detailsAlert(BuildContext context, OrderResponseDto orden) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Theme(
+          data: ThemeData(
+            dialogBackgroundColor: Colors.transparent,
+          ),
+          child: AlertDialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            title: Text(orden.flavor),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FadeInImage.assetNetwork(
+                  placeholder: 'images/loading.gif',
+                  image: orden.imgUrl,
+                  fit: BoxFit.cover,
+                  height: 200,
+                ),
+                Column(
+                  children: [
+               
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(orden.status,
+                        style: const TextStyle(color: Colors.green)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text('Tamaño: ${orden.size}'),
+                    Text('Relleno: ${orden.stuffing}'),
+                    Text('Fecha: ${orden.orderDay}'),
+                    Text('Precio: ${orden.total}'),
+                  ],
+                )
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cerrar'),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
