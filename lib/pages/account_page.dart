@@ -20,7 +20,7 @@ void cleanPreferences(BuildContext context) async {
 }
 void screenChangeExit(BuildContext context) {
   cleanPreferences(context);
-  Navigator.pushNamed(context, '/');
+  Navigator.pushReplacementNamed(context, '/');
 }
 
 const _backgroundColor = Color(0xff0F3DDE1);
