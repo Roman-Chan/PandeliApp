@@ -64,11 +64,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
+    final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
     final token = tokenProvider.getToken();
-    //print('hay o no ${token}');
+    print('hay o no ${token}');
     final initialroutes = token != '' ? '/home' : '/'; 
+
+    
     return MaterialApp(
+      
+  
       title: 'Pandeli',
 
       debugShowCheckedModeBanner: false,
@@ -76,9 +80,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       // darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
 
-      initialRoute: initialroutes,
+      initialRoute: token != '' ? '/home' : '/login',
       routes: {
-        '/': (context) => const LoginPage(),
+        '/login': (context) => const LoginPage(),
         '/signup': (context) => const RegisterPage(),
         '/home': (context) => const MenuPage(),
         '/options': (context) => const OptionsPage(),

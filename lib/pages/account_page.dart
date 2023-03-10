@@ -21,7 +21,7 @@ void cleanPreferences(BuildContext context)async{
 }
 void screenChangeExit(BuildContext context) {
   cleanPreferences(context);
-  Navigator.pushReplacementNamed(context, '/');
+  Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
 }
 
 const _backgroundColor = Color(0xff0F3DDE1);
