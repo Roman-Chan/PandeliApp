@@ -105,7 +105,7 @@ class AddAddresSection extends StatelessWidget {
                       ),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          final address = '${calleController.text} ${numeroController.text} ${cruzamientosController.text} ${coloniaController.text}';
+                          final address = '${calleController.text} N°${numeroController.text} entre ${cruzamientosController.text} Fracc.${coloniaController.text}';
                           context
                               .read<AddressProvider>()
                               .createAddres(address, context);
