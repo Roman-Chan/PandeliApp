@@ -49,7 +49,12 @@ class OrdersProvider extends ChangeNotifier {
         isLoading = false;
         isError = false;
         notifyListeners();
-      } 
+      } else {
+          _orders = [];
+        isLoading = false;
+        isError = false;
+        notifyListeners();
+      }
     } catch (e) {
       logger.d(e);
     }

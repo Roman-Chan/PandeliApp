@@ -38,9 +38,10 @@ class AddressPage extends StatelessWidget {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (addressProvider.address == null) {
+                } else if (addressProvider.address == null ||
+                    addressProvider.address!.isEmpty) {
                   return const Center(
-                    child: Text('No hay direcciones disponibles'),
+                    child: Text('No hay Direcciones.'),
                   );
                 } else {
                   return ListView.builder(
@@ -57,7 +58,7 @@ class AddressPage extends StatelessWidget {
                               margin: const EdgeInsets.only(bottom: 5),
                               child: ListTile(
                                 title: Text(
-                                  '$address',
+                                  address,
                                   style: const TextStyle(
                                     fontSize: 16,
                                   ),
@@ -101,4 +102,3 @@ class AddressPage extends StatelessWidget {
     );
   }
 }
-

@@ -51,6 +51,10 @@ class AddressProvider extends ChangeNotifier {
         isLoading = false;
         /*  isError = false; */
         notifyListeners();
+      } else {
+        _address = [];
+        isLoading = false;
+        notifyListeners();
       }
     } catch (e) {
       logger.d(e);
@@ -80,12 +84,11 @@ class AddressProvider extends ChangeNotifier {
     } else {
       /* logger.d(Uri.parse('$baseUrl/api/address/$id')); */
       logger.e('Error: ${responses.statusCode}');
-        if (context.mounted) {
+      if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: ${responses.statusCode}!')),
         );
       }
     }
   }
-    
 }
