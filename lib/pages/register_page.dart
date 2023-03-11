@@ -102,7 +102,22 @@ class _RegisterPageState extends State<RegisterPage> {
         .register(name, lastName, email, password)
         .then((success) {
       if (success) {
-        Navigator.pushNamed(context, '/home');
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Alert'),
+              content: const Text('Se ha enviado un correo de confirmacion'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(context, '/login',(route) => false,);
+                }, 
+                  child: const Text('OK'))
+                  ],
+            );
+          }
+      );
       } else {
         setState(() {
           _errorMessage = 'Error: usuario o contraseña incorrectos';

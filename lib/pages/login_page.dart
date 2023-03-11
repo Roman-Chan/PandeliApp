@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
       .login(email, password)
       .then((success) {
     if (success) {
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     } else {
         setState(() {
           _errorMessage = 'Error: usuario o contraseña incorrectos';

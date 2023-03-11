@@ -35,8 +35,6 @@ class DesignsProvider extends ChangeNotifier {
         },
       );
 
-      logger.d(response.body);
-
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         final List<dynamic> data = json['cakeDesigns']['docs'];
