@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pandeli_app/Widgets/login/label_password_login.dart';
 import 'package:pandeli_app/dtos/providers/register_provider.dart';
 import 'package:pandeli_app/widgets/button_form.dart';
 import 'package:pandeli_app/widgets/label.dart';
@@ -27,6 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _lastName = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  final _confirPassword = TextEditingController();
   String _errorMessage = '';
 
   @override
@@ -52,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(
                     height: 30.0,
                   ),
-                  Label(text: 'Nombre completo', controller: _nombreController),
+                  Label(text: 'Nombre', controller: _nombreController),
                   Label(
                     text: 'Apellido',
                     controller: _lastName,
@@ -61,10 +63,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     text: 'Correo electronico',
                     controller: _email,
                   ),
-                  Label(
-                    text: 'Contraseña',
+                  BtnFgPassword(
+                    textp: 'Contraseña',
                     controller: _password,
                   ),
+                  BtnFgPassword(
+                    textp: 'Confirmar contraseña',
+                    controller: _confirPassword),
                   ButtonForm(
                     text: 'Registrarse',
                     functionOnPressed: registro,
@@ -97,9 +102,10 @@ class _RegisterPageState extends State<RegisterPage> {
     final lastName = _lastName.text;
     final email = _email.text;
     final password = _password.text;
+    final comparePassword = _confirPassword.text;
 
     Provider.of<RegisterProvider>(context, listen: false)
-        .register(name, lastName, email, password)
+        .register(name, lastName, email, password,comparePassword)
         .then((success) {
       if (success) {
         showDialog(

@@ -67,20 +67,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
     final token = tokenProvider.getToken();
-    print('hay o no ${token}');
-    final initialroutes = token != '' ? '/home' : '/'; 
-
-    
     return MaterialApp(
-      
-  
       title: 'Pandeli',
-
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       // darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-
       initialRoute: token != '' ? '/home' : '/login',
       routes: {
         '/login': (context) => const LoginPage(),
