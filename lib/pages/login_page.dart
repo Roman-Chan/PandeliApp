@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 40.0),
                 Label(text: 'Email', controller: _emailController),
-                BtnFgPassword(controller: _passwordController),
+                BtnFgPassword(textp: 'Contraseña',controller: _passwordController),
                 ButtonForm(text: 'Login', functionOnPressed: autentification),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),

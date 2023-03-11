@@ -1,13 +1,11 @@
 import 'dart:convert';
 /* import 'dart:developer'; */
-
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:pandeli_app/dtos/providers/token_provider.dart';
 import 'package:pandeli_app/dtos/response/infoProfile_response.dto.dart';
 import 'package:pandeli_app/services/base_uri.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InfoProvider extends ChangeNotifier {
