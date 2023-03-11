@@ -14,19 +14,11 @@ class ListViewOrders extends StatelessWidget {
     return Scaffold(
       backgroundColor: _backgroundColor,
       body: Column(children: [
-        const SizedBox(
-          height: 15,
-        ),
-        const Text(
-          "Mis Pedidos",
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: _Color // establece la letra en negrita
-              ),
-        ),
-        const SizedBox(
-          height: 10,
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: const Text("Mis pedidos",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 18, color: _Color)),
         ),
         Expanded(child:
             Consumer<OrdersProvider>(builder: (context, ordersProvider, child) {
@@ -79,7 +71,8 @@ class ListViewOrders extends StatelessWidget {
                       },
                     ),
                   );
-                });
+                }
+                );
           }
         }))
       ]),
