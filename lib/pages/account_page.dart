@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/pages/address_page.dart';
-import 'package:pandeli_app/pages/payment_page.dart';
+import 'package:pandeli_app/Widgets/custom_card_account.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../dtos/providers/token_provider.dart';
 
 void screenChangeProfile(BuildContext context) {
   Navigator.pushNamed(context, '/info_profile');
 }
-
 void screenChangePayment(BuildContext context) {
   Navigator.pushNamed(context, '/payment');
 }
-
-void cleanPreferences(BuildContext context)async{
+void screenChangeAddress(BuildContext context) {
+  Navigator.pushNamed(context, '/address');
+}
+void cleanPreferences(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
   final tokenProvider = TokenProvider(prefs);
   tokenProvider.removeToken();
@@ -21,7 +20,7 @@ void cleanPreferences(BuildContext context)async{
 }
 void screenChangeExit(BuildContext context) {
   cleanPreferences(context);
-  Navigator.pushNamed(context, '/');
+  Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
 }
 
 const _backgroundColor = Color(0xff0F3DDE1);
@@ -30,7 +29,7 @@ const cardHeight = 55.0;
 const productoHeight = 100.0;
 
 class AccountPage extends StatelessWidget {
-  const AccountPage({super.key});
+  const AccountPage({Key? key}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,7 @@ class AccountPage extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: const Text("Cuenta",
+            child: const Text("Detalles de cuenta",
                 style: TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 18, color: _Color)),
           ),
@@ -48,86 +47,41 @@ class AccountPage extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 13),
               children: <Widget>[
-                InkWell(
-                  child: Card(
-                    margin: const EdgeInsets.only(bottom: 7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)),
-                    child: ListTile(
-                      title: const Text("Informacion de perfil"),
-                      leading: const Icon(
-                        Icons.person,
-                        color: Colors.blue,
-                      ),
-                      trailing: const Icon(Icons.navigate_next),
-                      onTap: () {
-                        screenChangeProfile(context);
-                      },
-                    ),
-                  ),
-                ),
-                InkWell(
+                CustomCard(
+                  title: "Informacion de perfil",
+                  icon: Icons.person,
+                  iconColor: Colors.blue,
+                  backgroundColor: Colors.white,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const PaymentPage()),
-                    );
+                    screenChangeProfile(context);
                   },
-                  child: Card(
-                    margin: const EdgeInsets.only(bottom: 7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)),
-                    child: const ListTile(
-                      title: Text("Metodo de pago"),
-                      leading: Icon(
-                        Icons.credit_card,
-                        color: Colors.green,
-                      ),
-                      trailing: Icon(Icons.navigate_next),
-                    ),
-                  ),
                 ),
-                InkWell(
+                CustomCard(
+                  title: "Metodo de pago",
+                  icon: Icons.credit_card,
+                  iconColor: Colors.green,
+                  backgroundColor: Colors.white,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AddressPage()),
-                    );
+                    screenChangePayment(context);
                   },
-                  child: Card(
-                    margin: const EdgeInsets.only(bottom: 7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)),
-                    child: const ListTile(
-                      title: Text("Direcciones"),
-                      leading: Icon(
-                        Icons.location_on,
-                        color: Colors.red,
-                      ),
-                      trailing: Icon(Icons.navigate_next),
-                    ),
-                  ),
                 ),
-                InkWell(
-                  child: Card(
-                    margin: const EdgeInsets.only(bottom: 7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)),
-                    child: ListTile(
-                      title: const Text("Salir"),
-                      leading: const Icon(
-                        Icons.exit_to_app,
-                        color: Colors.blue,
-                      ),
-                      //trailing: const Icon(Icons.exit_to_app),
-                      onTap: () {
-                        screenChangeExit(context)
-                        ;
-                      },
-                    ),
-                  ),
+                CustomCard(
+                  title: "Direcciones",
+                  icon: Icons.location_on,
+                  iconColor: Colors.red,
+                  backgroundColor: Colors.white,
+                  onTap: () {
+                    screenChangeAddress(context);
+                  },
+                ),
+                CustomCard(
+                  title: "Salir",
+                  icon: Icons.exit_to_app,
+                  iconColor: Colors.blue,
+                  backgroundColor: Colors.white,
+                  onTap: () {
+                    screenChangeExit(context);
+                  },
                 ),
               ],
             ),

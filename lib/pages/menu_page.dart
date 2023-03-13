@@ -48,15 +48,15 @@ class _MenuPageState extends State<MenuPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.list_alt_sharp),
-            label: "Orders",
+            label: "Ordenes",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Home",
+            label: "Inicio",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: "Account",
+            label: "Cuenta",
           ),
         ],
       ),

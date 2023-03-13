@@ -13,7 +13,6 @@ String createAddressRequestDtoToJson(CreateAddressRequestDto data) =>
 class CreateAddressRequestDto {
   CreateAddressRequestDto({
     required this.address,
-    
   });
 
   final String address;

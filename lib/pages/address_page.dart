@@ -4,11 +4,11 @@ import 'package:pandeli_app/pages/sections/add_address_section.dart';
 import 'package:provider/provider.dart';
 
 class AddressPage extends StatelessWidget {
-  const AddressPage({super.key});
+  const AddressPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const _Color = Color(0xff0a1356b);
+    const _color = Color(0xff0a1356b);
     const _backgroundColor = Color(0xff0F3DDE1);
     return Scaffold(
       backgroundColor: _backgroundColor,
@@ -23,38 +23,42 @@ class AddressPage extends StatelessWidget {
           const Text(
             "Mis Direcciones",
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: _Color // establece la letra en negrita
-                ),
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: _color,
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          Consumer<AddressProvider>(
-            builder: (context, addressProvider, child) => addressProvider
-                    .isLoading
-                ? const Center(
+          Expanded(
+            child: Consumer<AddressProvider>(
+              builder: (context, addressProvider, child) {
+                if (addressProvider.isLoading) {
+                  return const Center(
                     child: CircularProgressIndicator(),
-                  )
-                : SingleChildScrollView(
-                    child: Column(
-                      children: List.generate(
-                        addressProvider.address!.length,
-                        (i) => ListView.builder(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: addressProvider.address?[i].length ?? 0,
-                          itemBuilder: (context, index) {
-                            // final address = addressProvider.address?[i].addresses.elementAt(index);
-                            final address =
-                                addressProvider.address?[i].addresses[index];
+                  );
+                } else if (addressProvider.address == null ||
+                    addressProvider.address!.isEmpty) {
+                  return const Center(
+                    child: Text('No hay Direcciones.'),
+                  );
+                } else {
+                  return ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    itemCount: addressProvider.address!.length,
+                    itemBuilder: (context, i) {
+                      final addresses = addressProvider.address![i].addresses;
+                      return Column(
+                        children: List.generate(
+                          addresses.length,
+                          (index) {
+                            final address = addresses[index];
                             return Card(
                               margin: const EdgeInsets.only(bottom: 5),
                               child: ListTile(
                                 title: Text(
-                                  '$address',
+                                  address,
                                   style: const TextStyle(
                                     fontSize: 16,
                                   ),
@@ -71,9 +75,12 @@ class AddressPage extends StatelessWidget {
                             );
                           },
                         ),
-                      ),
-                    ),
-                  ),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
           ),
         ],
       ),

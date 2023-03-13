@@ -1,13 +1,8 @@
 /* MATERIAL */
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/dtos/providers/orders_provider.dart';
-import 'package:pandeli_app/dtos/providers/info_provider.dart';
-import 'package:pandeli_app/dtos/providers/order_provider.dart';
-import 'package:pandeli_app/dtos/providers/register_provider.dart';
 /* PUBS */
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-/* import 'package:pandeli_app/pages/orders_page.dart'; */
 /* PROVIDERS */
 import 'package:pandeli_app/dtos/providers/designs_provider.dart';
 import 'package:pandeli_app/dtos/providers/flavors_provider.dart';
@@ -16,7 +11,12 @@ import 'package:pandeli_app/dtos/providers/sizes_provider.dart';
 import 'package:pandeli_app/dtos/providers/stuffings_provider.dart';
 import 'package:pandeli_app/dtos/providers/token_provider.dart';
 import 'package:pandeli_app/dtos/providers/address_provider.dart';
+import 'package:pandeli_app/dtos/providers/orders_provider.dart';
+import 'package:pandeli_app/dtos/providers/info_provider.dart';
+import 'package:pandeli_app/dtos/providers/register_provider.dart';
+import 'package:pandeli_app/dtos/providers/order_provider.dart';
 /* PAGES */
+import 'package:pandeli_app/pages/change_password_page.dart';
 import 'package:pandeli_app/pages/account_page.dart';
 import 'package:pandeli_app/pages/info_order_page.dart';
 import 'package:pandeli_app/pages/info_profile_page.dart';
@@ -27,6 +27,7 @@ import 'package:pandeli_app/pages/options_page.dart';
 import 'package:pandeli_app/pages/payment_methods_page.dart';
 import 'package:pandeli_app/pages/payment_page.dart';
 import 'package:pandeli_app/pages/register_page.dart';
+import 'package:pandeli_app/pages/address_page.dart';
 /* THEMES */
 import 'package:pandeli_app/themes/color_schemes.g.dart';
 
@@ -67,21 +68,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
+    final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
     final token = tokenProvider.getToken();
-    //print('hay o no ${token}');
-    final initialroutes = token != '' ? '/home' : '/'; 
     return MaterialApp(
       title: 'Pandeli',
-
       debugShowCheckedModeBanner: false,
-
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       // darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-
-      initialRoute: initialroutes,
+      initialRoute: token != '' ? '/home' : '/login',
       routes: {
-        '/': (context) => const LoginPage(),
+        '/login': (context) => const LoginPage(),
         '/signup': (context) => const RegisterPage(),
         '/home': (context) => const MenuPage(),
         '/options': (context) => const OptionsPage(),
@@ -92,6 +88,8 @@ class MyApp extends StatelessWidget {
         '/info_profile': (context) => const InfoProfilePage(),
         '/info_order': (context) => const InfoOrderPage(),
         '/payment': (context) => const PaymentPage(),
+        '/address': (context) => const AddressPage(),
+        '/forgotPassword': (context) => const ChangePassword(),
       },
     );
   }

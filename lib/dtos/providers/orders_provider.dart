@@ -30,7 +30,7 @@ class OrdersProvider extends ChangeNotifier {
 
       final token = await getToken();
       final response = await http.get(
-        Uri.parse('$baseUrl/api/order/$id/1'),
+        Uri.parse('$baseUrl/api/order/$id/1/15'),
         headers: {
           'Authorization': '$token',
         },
@@ -49,7 +49,12 @@ class OrdersProvider extends ChangeNotifier {
         isLoading = false;
         isError = false;
         notifyListeners();
-      } 
+      } else {
+          _orders = [];
+        isLoading = false;
+        isError = false;
+        notifyListeners();
+      }
     } catch (e) {
       logger.d(e);
     }

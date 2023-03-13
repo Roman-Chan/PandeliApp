@@ -29,7 +29,7 @@ class SizesProvider extends ChangeNotifier {
       final token = await getToken();
 
       final response = await http.get(
-        Uri.parse('$baseUrl/api/breadsizes/1'),
+        Uri.parse('$baseUrl/api/breadsizes/1/10'),
         headers: {
           'Authorization': '$token',
         },

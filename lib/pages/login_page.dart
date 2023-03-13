@@ -45,14 +45,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 40.0),
                 Label(text: 'Email', controller: _emailController),
-                BtnFgPassword(controller: _passwordController),
+                BtnFgPassword(textp: 'Contraseña',controller: _passwordController),
                 ButtonForm(text: 'Login', functionOnPressed: autentification),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(_errorMessage,
                       style: const TextStyle(color: Colors.red)),
                 ),
-                const ButtonPassword(),
+                const ButtonPassword(onPressed: screenChangePassword),
                 const SizedBox(height: 170.0),
                 const OpcionBelow(
                   text: '¿Nuevo usuario?',
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
       .login(email, password)
       .then((success) {
     if (success) {
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     } else {
         setState(() {
           _errorMessage = 'Error: usuario o contraseña incorrectos';
@@ -92,4 +92,8 @@ class _LoginPageState extends State<LoginPage> {
 
 void screenChangeR(BuildContext context) {
   Navigator.pushNamed(context, '/signup');
+}
+
+void screenChangePassword(BuildContext context){
+  Navigator.pushNamed(context, '/forgotPassword');
 }
