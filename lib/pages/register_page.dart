@@ -10,7 +10,7 @@ import 'dart:core';
 import 'package:provider/provider.dart';
 
 void changeScreen(BuildContext context) {
-  Navigator.pushNamed(context, '/');
+  Navigator.pushNamed(context, '/login');
 }
 
 class RegisterPage extends StatefulWidget {

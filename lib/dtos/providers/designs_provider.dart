@@ -29,7 +29,7 @@ class DesignsProvider extends ChangeNotifier {
       final token = await getToken();
 
       final response = await http.get(
-        Uri.parse('$baseUrl/api/cakedesigns/1'),
+        Uri.parse('$baseUrl/api/cakedesigns/1/10'),
         headers: {
           'Authorization': '$token',
         },
