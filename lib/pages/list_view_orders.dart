@@ -34,7 +34,7 @@ class ListViewOrders extends StatelessWidget {
           } else {
             return ListView.builder(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+                    const EdgeInsets.symmetric(horizontal: 12),
                 itemCount: ordersProvider.orders?.length,
                 itemBuilder: (context, index) {
                   final orden = ordersProvider.orders?[index];
