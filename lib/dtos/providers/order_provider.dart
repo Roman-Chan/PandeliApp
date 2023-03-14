@@ -34,6 +34,15 @@ class OrderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  clearOptions() {
+    _design = '';
+    _flavor = '';
+    _size = '';
+    _stuffing = '';
+    _order = {};
+    notifyListeners();
+  }
+
   createOrder() async {
     final prefs = await SharedPreferences.getInstance();
     final id = TokenProvider(prefs).getid();

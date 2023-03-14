@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class OptionCard extends StatelessWidget {
+class OptionCardTest extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String price;
   final Function() onTapHandler;
   final bool active;
 
-  const OptionCard({
+  const OptionCardTest({
     Key? key,
     required this.imageUrl,
     required this.title,
@@ -19,7 +19,7 @@ class OptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTapHandler(),
+      onTap: onTapHandler,
       child: CardContent(
         imageUrl: imageUrl,
         title: title,
