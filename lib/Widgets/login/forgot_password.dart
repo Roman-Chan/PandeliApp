@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ButtonPassword extends StatelessWidget {
+  final Function onPressed;
   const ButtonPassword({
-    Key? key,
+    Key? key, required this.onPressed
   }) : super(key: key);
 
   @override
@@ -13,7 +14,7 @@ class ButtonPassword extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {onPressed(context);},
             child: const Text('Olvide mi contraseña'),
           ),
         ],

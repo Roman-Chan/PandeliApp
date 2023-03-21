@@ -30,7 +30,7 @@ class OrdersProvider extends ChangeNotifier {
 
       final token = await getToken();
       final response = await http.get(
-        Uri.parse('$baseUrl/api/order/$id/1/10'),
+        Uri.parse('$baseUrl/api/order/$id/1/15'),
         headers: {
           'Authorization': '$token',
         },

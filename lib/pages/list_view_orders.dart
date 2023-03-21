@@ -20,61 +20,68 @@ class ListViewOrders extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: 18, color: _Color)),
         ),
-        Expanded(child:
-            Consumer<OrdersProvider>(builder: (context, ordersProvider, child) {
-          if (ordersProvider.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (ordersProvider.orders == null ||
-              ordersProvider.orders!.isEmpty) {
-            return const Center(
-              child: Text('No hay órdenes.'),
-            );
-          } else {
-            return ListView.builder(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12),
-                itemCount: ordersProvider.orders?.length,
-                itemBuilder: (context, index) {
-                  final orden = ordersProvider.orders?[index];
+        Expanded(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await Provider.of<OrdersProvider>(context, listen: false)
+                  .fetchOrders();
+            },
+            child: Consumer<OrdersProvider>(
+              builder: (context, ordersProvider, child) {
+                if (ordersProvider.isLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (ordersProvider.orders == null ||
+                    ordersProvider.orders!.isEmpty) {
+                  return const Center(
+                    child: Text('No hay órdenes.'),
+                  );
+                } else {
+                  return ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    itemCount: ordersProvider.orders?.length,
+                    itemBuilder: (context, index) {
+                      final orden = ordersProvider.orders?[index];
 
-                  return Card(
-                    child: ListTile(
-                      title: Text(
-                        orden!.description,
-                        style: const TextStyle(
-                          fontWeight:
-                              FontWeight.bold, // establece la letra en negrita
+                      return Card(
+                        child: ListTile(
+                          title: Text(
+                            orden!.description,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Sabor: ${orden.flavor}'),
+                              Text('Tamaño: ${orden.size}'),
+                              Text('Relleno: ${orden.stuffing}'),
+                              Text('Fecha: ${orden.orderDay}'),
+                              Text('Precio: \$${orden.total}'),
+                            ],
+                          ),
+                          leading: FadeInImage.assetNetwork(
+                            placeholder: 'images/loading.gif',
+                            image: orden.imgUrl,
+                            fit: BoxFit.cover,
+                            height: double.infinity,
+                          ),
+                          trailing: Text(orden.status,
+                              style: const TextStyle(color: Colors.green)),
+                          onTap: () {
+                            detailsAlert(context, orden);
+                          },
                         ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Sabor: ${orden.flavor}'),
-                          Text('Tamaño: ${orden.size}'),
-                          Text('Relleno: ${orden.stuffing}'),
-                          Text('Fecha: ${orden.orderDay}'),
-                          Text('Precio: \$${orden.total}'),
-                        ],
-                      ),
-                      leading: FadeInImage.assetNetwork(
-                        placeholder: 'images/loading.gif',
-                        image: orden.imgUrl,
-                        fit: BoxFit.cover,
-                        height: double.infinity,
-                      ),
-                      trailing: Text(orden.status,
-                          style: const TextStyle(color: Colors.green)),
-                      onTap: () {
-                        detailsAlert(context, orden);
-                      },
-                    ),
+                      );
+                    },
                   );
                 }
-                );
-          }
-        }))
+              },
+            ),
+          ),
+        ),
       ]),
     );
   }

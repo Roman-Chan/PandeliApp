@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(_errorMessage,
                       style: const TextStyle(color: Colors.red)),
                 ),
-                const ButtonPassword(),
+                const ButtonPassword(onPressed: screenChangePassword),
                 const SizedBox(height: 170.0),
                 const OpcionBelow(
                   text: '¿Nuevo usuario?',
@@ -92,4 +92,8 @@ class _LoginPageState extends State<LoginPage> {
 
 void screenChangeR(BuildContext context) {
   Navigator.pushNamed(context, '/signup');
+}
+
+void screenChangePassword(BuildContext context){
+  Navigator.pushNamed(context, '/forgotPassword');
 }
