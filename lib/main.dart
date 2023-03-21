@@ -1,5 +1,6 @@
 /* MATERIAL */
 import 'package:flutter/material.dart';
+import 'package:pandeli_app/pages/order_page.dart';
 /* PUBS */
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -90,6 +91,7 @@ class MyApp extends StatelessWidget {
         '/payment': (context) => const PaymentPage(),
         '/address': (context) => const AddressPage(),
         '/forgotPassword': (context) => const ChangePassword(),
+        '/order': (context) => const OrderPage(),
       },
     );
   }

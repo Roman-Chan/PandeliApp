@@ -48,7 +48,7 @@ class CardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     var orientation = MediaQuery.of(context).orientation;
     double widthAndHeight = orientation == Orientation.portrait ? 100 : 120;
-    double widthContainerText = orientation == Orientation.portrait ? 90 : 100;
+    double widthContainerText = orientation == Orientation.portrait ? 90 : 65;
     const double raidius = 10;
 
     return Card(

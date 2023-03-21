@@ -13,6 +13,21 @@ class OrderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _designName = '';
+  String get getDesignName => _designName;
+  set designName(String designName) {
+    _designName = designName;
+    notifyListeners();
+  }
+
+  String _imgURL =
+      'https://cdn.pixabay.com/photo/2022/10/04/14/27/cat-7498364_960_720.jpg';
+  String get getImgURL => _imgURL;
+  set imgURL(String imgURL) {
+    _imgURL = imgURL;
+    notifyListeners();
+  }
+
   String _flavor = '';
   String get getFlavor => _flavor;
   set flavor(String flavor) {
