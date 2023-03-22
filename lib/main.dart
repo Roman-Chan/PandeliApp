@@ -19,7 +19,6 @@ import 'package:pandeli_app/dtos/providers/info_provider.dart';
 import 'package:pandeli_app/dtos/providers/register_provider.dart';
 import 'package:pandeli_app/dtos/providers/order_provider.dart';
 /* PAGES */
-import 'package:pandeli_app/pages/change_password_page.dart';
 import 'package:pandeli_app/pages/account_page.dart';
 import 'package:pandeli_app/pages/info_order_page.dart';
 import 'package:pandeli_app/pages/info_profile_page.dart';
