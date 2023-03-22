@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:pandeli_app/pages/account_page.dart';
 import 'package:pandeli_app/pages/make_order_page.dart';
 import 'package:pandeli_app/pages/list_view_orders.dart';
@@ -15,7 +16,7 @@ class _MenuPageState extends State<MenuPage> {
   int _selectedIndex = 1;
 
   static const List<Widget> _pageOptions = <Widget>[
-   /*  OrdersPage(), */
+    /*  OrdersPage(), */
     ListViewOrders(),
     MakeOrderPage(),
     AccountPage()
@@ -35,7 +36,11 @@ class _MenuPageState extends State<MenuPage> {
         elevation: 1,
         shadowColor: Theme.of(context).colorScheme.outline,
         surfaceTintColor: Theme.of(context).colorScheme.onPrimary,
-        title: Text(_selectedIndex == 1 ? 'Home' : _selectedIndex == 0 ? 'Orders' : 'Perfil'),
+        title: Text(_selectedIndex == 1
+            ? 'Home'
+            : _selectedIndex == 0
+                ? 'Orders'
+                : 'Perfil'),
       ),
       body: _pageOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
