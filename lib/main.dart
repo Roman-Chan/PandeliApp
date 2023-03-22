@@ -1,5 +1,6 @@
 /* MATERIAL */
 import 'package:flutter/material.dart';
+import 'package:pandeli_app/dtos/providers/reset_password_provider.dart';
 import 'package:pandeli_app/pages/change_password_page.dart';
 /* PUBS */
 import 'package:provider/provider.dart';
@@ -39,6 +40,7 @@ void main() async {
       providers: [
         Provider<TokenProvider>(create: (_) => TokenProvider(prefs)),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ChangeNotifierProvider<ProviderSendEmail>(create: (_) => ProviderSendEmail()),
         ChangeNotifierProvider<RegisterProvider>(
             create: (_) => RegisterProvider()),
         ChangeNotifierProvider<InfoProvider>(
