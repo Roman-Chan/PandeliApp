@@ -7,6 +7,7 @@ import 'package:pandeli_app/services/base_uri.dart';
 class RegisterProvider extends ChangeNotifier {
   Future<bool> register(name,lastName,email, password,comparePassword) async {
     final url = Uri.parse('$baseUrl/api/signup');
+
       final response = await http.post(url, body: {
         'name':name,
         'lastName': lastName,
@@ -15,6 +16,7 @@ class RegisterProvider extends ChangeNotifier {
         'comparePassword': comparePassword
       });
       if (response.statusCode == 200) { 
+
         return true;
       } else {
         final errorMessage = json.decode(response.body)['message'];

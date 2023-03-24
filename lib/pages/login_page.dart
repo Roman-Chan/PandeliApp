@@ -34,8 +34,11 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: const Color(0xFFb0f2c2),
       body: SafeArea(
         child: Consumer<LoginProvider>(
-          builder: (context, loginProvider, child) {
-            return ListView(
+          builder: (context, loginProvider, child) =>
+            loginProvider.isloadin ? const Center(
+                    child: CircularProgressIndicator(),
+                  ):
+              ListView(
               children: <Widget>[
                 const SizedBox(height: 40.0),
                 Column(
@@ -60,8 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                   pressBelow: screenChangeR,
                 ),
               ],
-            );
-          },
+            ),
         ),
       ),
     );

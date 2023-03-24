@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pandeli_app/Widgets/option_card.dart';
+import 'package:pandeli_app/Widgets/option_card_test.dart';
 import 'package:pandeli_app/Widgets/title_section.dart';
 import 'package:pandeli_app/dtos/providers/flavors_provider.dart';
+import 'package:pandeli_app/dtos/providers/order_provider.dart';
 import 'package:provider/provider.dart';
 
 class FlavorSection extends StatelessWidget {
@@ -16,77 +18,87 @@ class FlavorSection extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(bottom: 12),
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // mainAxisSize: MainAxisSize.max,
-          children: [
-            const TitleSection(title: "Sabor"),
-            Consumer<FlavorsProvider>(
-              builder: (context, flavorsProvider, child) => flavorsProvider
-                      .isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : Expanded(
-                      child: GridView.builder(
-                        padding: const EdgeInsets.all(12),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount:
-                              orientation == Orientation.portrait ? 2 : 4,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.90,
-                        ),
-                        itemCount: flavorsProvider.flavors?.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final flavor = flavorsProvider.flavors![index];
-
-                          return OptionCard(
-                            imageUrl: flavor.imgUrl,
-                            title: flavor.flavor,
-                            price: flavor.price.toString(),
-                          );
-                        },
-                      ),
-                    ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        child: Consumer2<FlavorsProvider, OrderProvider>(
+          builder: (context, flavorsProvider, orderProvider, child) {
+            return Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisSize: MainAxisSize.max,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    pageController.previousPage(
-                      duration: const Duration(
-                        milliseconds: 250,
+                const TitleSection(title: "Sabor"),
+                flavorsProvider.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : Expanded(
+                        child: GridView.builder(
+                          padding: const EdgeInsets.all(12),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount:
+                                orientation == Orientation.portrait ? 2 : 4,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: 0.90,
+                          ),
+                          itemCount: flavorsProvider.flavors?.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final flavor = flavorsProvider.flavors![index];
+
+                            return OptionCardTest(
+                              imageUrl: flavor.imgUrl,
+                              title: flavor.flavor,
+                              price: flavor.price.toString(),
+                              active: orderProvider.flavor?.id == flavor.id,
+                              onTapHandler: () {
+                                orderProvider.flavor = flavor;
+                              },
+                            );
+                          },
+                        ),
                       ),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                    foregroundColor: Theme.of(context).colorScheme.primary,
-                  ),
-                  child: const Text("Anterior"),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    pageController.nextPage(
-                      duration: const Duration(
-                        milliseconds: 250,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        pageController.previousPage(
+                          duration: const Duration(
+                            milliseconds: 250,
+                          ),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        foregroundColor: Theme.of(context).colorScheme.primary,
                       ),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                  child: const Text("Siguiente"),
+                      child: const Text("Anterior"),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: orderProvider.flavor != null
+                          ? () {
+                              pageController.nextPage(
+                                duration: const Duration(
+                                  milliseconds: 250,
+                                ),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      child: const Text("Siguiente"),
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

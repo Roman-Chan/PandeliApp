@@ -20,8 +20,10 @@ class ViewProfile extends StatelessWidget {
             color: Colors.white, // Agregar color de fondo
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Consumer<InfoProvider>(builder:((context, infoProvider, child) => 
-          Column(
+          child: Consumer<InfoProvider>(builder:((context, infoProvider, child) =>
+          infoProvider.isloadin ? const Center(
+                    child: CircularProgressIndicator(),)
+          : Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -59,9 +61,8 @@ class ViewProfile extends StatelessWidget {
                 ),
               )
             ],
-          )
-        
-        ) )
+          )   
+  ))
         ));
   }
 }
