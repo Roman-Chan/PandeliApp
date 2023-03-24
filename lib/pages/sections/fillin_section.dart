@@ -45,10 +45,9 @@ class FillingSection extends StatelessWidget {
                               imageUrl: stuffing.imgUrl,
                               title: stuffing.stuffing,
                               price: stuffing.price.toString(),
-                              active: orderProvider.getStuffing ==
-                                  stuffing.stuffing,
+                              active: orderProvider.stuffing?.id == stuffing.id,
                               onTapHandler: () {
-                                orderProvider.stuffing = stuffing.stuffing;
+                                orderProvider.stuffing = stuffing;
                               },
                             );
                           },
@@ -77,10 +76,10 @@ class FillingSection extends StatelessWidget {
                       width: 10,
                     ),
                     ElevatedButton(
-                      onPressed: orderProvider.getFlavor != ''
+                      onPressed: orderProvider.flavor != null
                           ? () {
                               orderProvider.createOrder();
-                              Navigator.pushReplacementNamed(context, '/order');
+                              Navigator.pushNamed(context, '/order');
                             }
                           : null,
                       style: ElevatedButton.styleFrom(

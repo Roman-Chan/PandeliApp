@@ -1,60 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:pandeli_app/dtos/providers/token_provider.dart';
+import 'package:pandeli_app/dtos/response/design_response_dto.dart';
+import 'package:pandeli_app/dtos/response/flavor_response_dto.dart';
+import 'package:pandeli_app/dtos/response/size_response_dto.dart';
+import 'package:pandeli_app/dtos/response/stuffing_response_dto.dart';
+import 'package:pandeli_app/services/base_uri.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class OrderProvider extends ChangeNotifier {
+  final logger = Logger();
+
   Map _order = {};
   Map get order => _order;
 
-  String _design = '';
-  String get getDesign => _design;
-  set design(String design) {
-    _design = design;
+  DesignResponseDto? _design;
+  DesignResponseDto? get design => _design;
+  set design(DesignResponseDto? newDesign) {
+    _design = newDesign;
     notifyListeners();
   }
 
-  String _designName = '';
-  String get getDesignName => _designName;
-  set designName(String designName) {
-    _designName = designName;
+  FlavorResponseDto? _flavor;
+  FlavorResponseDto? get flavor => _flavor;
+  set flavor(FlavorResponseDto? newFlavor) {
+    _flavor = newFlavor;
     notifyListeners();
   }
 
-  String _imgURL =
-      'https://cdn.pixabay.com/photo/2022/10/04/14/27/cat-7498364_960_720.jpg';
-  String get getImgURL => _imgURL;
-  set imgURL(String imgURL) {
-    _imgURL = imgURL;
+  SizeResponseDto? _size;
+  SizeResponseDto? get size => _size;
+  set size(SizeResponseDto? newSize) {
+    _size = newSize;
     notifyListeners();
   }
 
-  String _flavor = '';
-  String get getFlavor => _flavor;
-  set flavor(String flavor) {
-    _flavor = flavor;
+  StuffingResponseDto? _stuffing;
+  StuffingResponseDto? get stuffing => _stuffing;
+  set stuffing(StuffingResponseDto? newStuffing) {
+    _stuffing = newStuffing;
     notifyListeners();
   }
 
-  String _size = '';
-  String get getSize => _size;
-  set size(String size) {
-    _size = size;
+  String _deliveriDate = '';
+  String get getDeliveriDate => _deliveriDate;
+  set deliveriDate(String deliveriDate) {
+    _deliveriDate = deliveriDate;
     notifyListeners();
   }
 
-  String _stuffing = '';
-  String get getStuffing => _stuffing;
-  set stuffing(String stuffing) {
-    _stuffing = stuffing;
-    notifyListeners();
-  }
+  bool _isComplete = false;
+  bool get isComplete => _isComplete;
 
   clearOptions() {
-    _design = '';
-    _flavor = '';
-    _size = '';
-    _stuffing = '';
+    _design = null;
+    _flavor = null;
+    _size = null;
+    _stuffing = null;
     _order = {};
+    _deliveriDate = '';
+
+    _isComplete = false;
     notifyListeners();
   }
 
@@ -63,12 +70,41 @@ class OrderProvider extends ChangeNotifier {
     final id = TokenProvider(prefs).getid();
 
     _order = {
-      'userId': id,
-      'id_design': _design,
-      'id_size': _size,
-      'id_flavor': _flavor,
-      'id_stuffing': _stuffing,
+      'id_user': id,
+      'id_design': _design!.id,
+      'id_size': _size!.id,
+      'id_flavor': _flavor!.id,
+      'id_stuffing': _stuffing!.id,
+      'date': _deliveriDate,
     };
+
+    if (_design != null &&
+        _size != null &&
+        _flavor != null &&
+        _stuffing != null &&
+        _deliveriDate != '') _isComplete = true;
+
     notifyListeners();
+  }
+
+  Future<bool> postOrder() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = TokenProvider(prefs).getToken();
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/order'),
+        headers: {
+          'Authorization': token,
+        },
+        body: _order,
+      );
+
+      logger.d(response.body);
+    } catch (e) {
+      logger.d(e);
+    }
+
+    return false;
   }
 }

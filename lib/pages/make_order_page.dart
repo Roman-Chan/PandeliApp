@@ -47,11 +47,9 @@ class MakeOrderPage extends StatelessWidget {
                             title: design.description,
                             price: design.price.toString(),
                             active:
-                                orderProvider.getDesign == design.description,
+                                orderProvider.design?.id == design.id,
                             onTapHandler: () {
-                              orderProvider.design = design.id;
-                              orderProvider.designName = design.description;
-                              // orderProvider.imgURL = design.imgUrl;
+                              orderProvider.design = design;
                               Navigator.pushNamed(
                                 context,
                                 '/options',

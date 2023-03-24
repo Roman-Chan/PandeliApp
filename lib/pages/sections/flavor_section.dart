@@ -46,9 +46,9 @@ class FlavorSection extends StatelessWidget {
                               imageUrl: flavor.imgUrl,
                               title: flavor.flavor,
                               price: flavor.price.toString(),
-                              active: orderProvider.getFlavor == flavor.flavor,
+                              active: orderProvider.flavor?.id == flavor.id,
                               onTapHandler: () {
-                                orderProvider.flavor = flavor.flavor;
+                                orderProvider.flavor = flavor;
                               },
                             );
                           },
@@ -77,7 +77,7 @@ class FlavorSection extends StatelessWidget {
                       width: 10,
                     ),
                     ElevatedButton(
-                      onPressed: orderProvider.getFlavor != ''
+                      onPressed: orderProvider.flavor != null
                           ? () {
                               pageController.nextPage(
                                 duration: const Duration(

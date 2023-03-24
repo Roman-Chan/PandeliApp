@@ -45,15 +45,15 @@ class WidthSection extends StatelessWidget {
                               title: size.size,
                               price: size.price.toString(),
                               onTapHandler: () {
-                                orderProvider.size = size.size;
+                                orderProvider.size = size;
                               },
-                              active: orderProvider.getSize == size.size,
+                              active: orderProvider.size?.id == size.id,
                             );
                           },
                         ),
                       ),
                 ElevatedButton(
-                  onPressed: orderProvider.getSize != ''
+                  onPressed: orderProvider.size != null
                       ? () {
                           pageController.nextPage(
                             duration: const Duration(
