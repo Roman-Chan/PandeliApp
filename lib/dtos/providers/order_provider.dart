@@ -50,6 +50,16 @@ class OrderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int _address = 0;
+  int get address => _address;
+  set address(int newAddress) {
+    _address = newAddress;
+    notifyListeners();
+  }
+
+  int _subtotal = 0;
+  int get subtotal => _subtotal;
+
   bool _isComplete = false;
   bool get isComplete => _isComplete;
 
@@ -61,6 +71,7 @@ class OrderProvider extends ChangeNotifier {
     _order = {};
     _deliveriDate = '';
 
+    _subtotal = 0;
     _isComplete = false;
     notifyListeners();
   }
@@ -85,6 +96,12 @@ class OrderProvider extends ChangeNotifier {
         _deliveriDate != '') _isComplete = true;
 
     notifyListeners();
+  }
+
+  calcSubtotal() {
+    _subtotal =
+        _design!.price + _size!.price + _flavor!.price + _stuffing!.price;
+    ChangeNotifier();
   }
 
   Future<bool> postOrder() async {

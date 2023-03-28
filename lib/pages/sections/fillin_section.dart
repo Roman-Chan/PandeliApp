@@ -76,9 +76,10 @@ class FillingSection extends StatelessWidget {
                       width: 10,
                     ),
                     ElevatedButton(
-                      onPressed: orderProvider.flavor != null
+                      onPressed: orderProvider.stuffing != null
                           ? () {
                               orderProvider.createOrder();
+                              orderProvider.calcSubtotal();
                               Navigator.pushNamed(context, '/order');
                             }
                           : null,

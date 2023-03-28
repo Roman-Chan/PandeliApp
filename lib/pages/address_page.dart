@@ -44,36 +44,29 @@ class AddressPage extends StatelessWidget {
                     child: Text('No hay Direcciones.'),
                   );
                 } else {
+                  final addressess = addressProvider.address;
                   return ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    itemCount: addressProvider.address!.length,
+                    itemCount: addressess!.length,
                     itemBuilder: (context, i) {
-                      final addresses = addressProvider.address![i].addresses;
-                      return Column(
-                        children: List.generate(
-                          addresses.length,
-                          (index) {
-                            final address = addresses[index];
-                            return Card(
-                              margin: const EdgeInsets.only(bottom: 5),
-                              child: ListTile(
-                                title: Text(
-                                  address,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                leading: const Icon(
-                                  Icons.directions_outlined,
-                                  color: Colors.blue,
-                                ),
-                                trailing: const Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            );
-                          },
+                      final address = addressess[i];
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: ListTile(
+                          title: Text(
+                            address.address,
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          leading: const Icon(
+                            Icons.directions_outlined,
+                            color: Colors.blue,
+                          ),
+                          trailing: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
                         ),
                       );
                     },
