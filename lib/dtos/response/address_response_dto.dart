@@ -1,20 +1,28 @@
 class AddressResponseDto {
   AddressResponseDto({
-    required this.addresses,
+    required this.index,
+    required this.address,
+    // required this.addresses,
   });
 
-  final List<String> addresses;
+  final int index;
+  final String address;
+  // final List<String> addresses;
 
-  int get length => addresses.length;
+  // int get length => addresses.length;
 
-  String operator [](int index) => addresses[index]; // definición del operador '[]'
+  // String operator [](int index) => addresses[index]; // definición del operador '[]'
 
-  factory AddressResponseDto.fromJson(Map<String, dynamic> json) =>
-      AddressResponseDto(
-        addresses: (json["addresses"] as List<dynamic>).map((address) => address.toString()).toList(),
-      );
-      
+  // factory AddressResponseDto.fromJson(Map<String, dynamic> json) =>
+  //     AddressResponseDto(
+  //       addresses: (json["addresses"] as List<dynamic>).map((address) => address.toString()).toList(),
+  //     );
+
+  factory AddressResponseDto.fromMap(Map<String, dynamic> json) =>
+      AddressResponseDto(index: json['index'], address: json['address']);
+
   Map<String, dynamic> toJson() => {
-        "addresses": List<dynamic>.from(addresses.map((x) => x)),
+        "index": index,
+        "address": address,
       };
 }

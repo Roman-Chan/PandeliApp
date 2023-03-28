@@ -42,14 +42,18 @@ class AddressProvider extends ChangeNotifier {
       logger.d(response.body);
 
       if (response.statusCode == 200) {
-        final List<dynamic> json = jsonDecode(response.body);
+        final List<dynamic> json = jsonDecode(response.body)[0];
         _address = json
             .map(
-              (list) => AddressResponseDto(addresses: List<String>.from(list)),
+              (address) => AddressResponseDto.fromMap({
+                'index': json.indexOf(address),
+                'address': address,
+              }),
             )
             .toList();
         isLoading = false;
         /*  isError = false; */
+        logger.d(_address);
         notifyListeners();
       } else {
         _address = [];

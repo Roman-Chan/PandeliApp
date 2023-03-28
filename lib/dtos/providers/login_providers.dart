@@ -11,21 +11,20 @@ class LoginProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final tokenProvider = TokenProvider(prefs);
     final url = Uri.parse('$baseUrl/api/signin');
-      final response = await http.post(url, body: {
-        'email': email,
-        'password': password,
-      });
-      if (response.statusCode == 200) {
-        final token = json.decode(response.body)['token'];
-        final id = json.decode(response.body)['_id'];
-        tokenProvider.setToken(token);
-        tokenProvider.setId(id);
-        isloadin = false;
-        return true;
-      } else {
-        final errorMessage = json.decode(response.body)['message'];
-        throw Exception(errorMessage);
-
-      }
+    final response = await http.post(url, body: {
+      'email': email,
+      'password': password,
+    });
+    if (response.statusCode == 200) {
+      final token = json.decode(response.body)['token'];
+      final id = json.decode(response.body)['_id'];
+      tokenProvider.setToken(token);
+      tokenProvider.setId(id);
+      isloadin = false;
+      return true;
+    } else {
+      final errorMessage = json.decode(response.body)['message'];
+      throw Exception(errorMessage);
+    }
   }
 }
