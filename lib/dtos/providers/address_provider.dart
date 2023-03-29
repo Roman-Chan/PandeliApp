@@ -6,12 +6,10 @@ import 'package:pandeli_app/dtos/providers/token_provider.dart';
 import 'package:pandeli_app/dtos/response/address_response_dto.dart';
 import 'package:pandeli_app/services/base_uri.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-/* import 'package:pandeli_app/dtos/response/create_address_response.dart'; */
+
 
 class AddressProvider extends ChangeNotifier {
   final logger = Logger();
-
-  /*  bool isError = false; */
 
   Future getToken() async {
     final prefs = await SharedPreferences.getInstance();
@@ -95,4 +93,33 @@ class AddressProvider extends ChangeNotifier {
       }
     }
   }
+Future deleteAddress(int index, String address) async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final id = TokenProvider(prefs).getid();
+    final token = await getToken();
+    final response = await http.delete(
+      Uri.parse('$baseUrl/api/addresses/$id/$index'),
+      headers: {
+        'Authorization': '$token',
+      },
+    );
+    if (response.statusCode == 200) {
+      _address?.removeAt(index);
+      notifyListeners();
+      if (isLoading) {
+        isLoading = false;
+      }
+      if (_address!.isEmpty) {
+        notifyListeners();
+      }
+    } else {
+      logger.e('Error deleting address: ${response.body}');
+    }
+  } catch (e) {
+    logger.e('Error deleting address: $e');
+  }
+}
+
+
 }
