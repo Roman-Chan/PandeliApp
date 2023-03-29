@@ -46,6 +46,10 @@ class StuffingsProvider extends ChangeNotifier {
         isError = false;
 
         notifyListeners();
+      } else {
+        _stuffings = [];
+        isLoading = false;
+        notifyListeners();
       }
     } catch (e) {
       logger.d(e);

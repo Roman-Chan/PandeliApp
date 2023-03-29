@@ -26,33 +26,42 @@ class FlavorSection extends StatelessWidget {
                   const TitleSection(title: "Sabor"),
                   flavorsProvider.isLoading
                       ? const Center(child: CircularProgressIndicator())
-                      : Expanded(
-                          child: GridView.builder(
-                            padding: const EdgeInsets.all(12),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  orientation == Orientation.portrait ? 2 : 4,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10,
-                              childAspectRatio: 0.90,
-                            ),
-                            itemCount: flavorsProvider.flavors?.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final flavor = flavorsProvider.flavors![index];
+                      : flavorsProvider.flavors!.isEmpty
+                          ? const Center(
+                              child: Text("No hay opciones"),
+                            )
+                          : Expanded(
+                              child: GridView.builder(
+                                padding: const EdgeInsets.all(12),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      orientation == Orientation.portrait
+                                          ? 2
+                                          : 4,
+                                  mainAxisSpacing: 10,
+                                  crossAxisSpacing: 10,
+                                  childAspectRatio: 0.90,
+                                ),
+                                itemCount: flavorsProvider.flavors?.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final flavor =
+                                      flavorsProvider.flavors![index];
 
-                              return OptionCardTest(
-                                imageUrl: flavor.imgUrl,
-                                title: flavor.flavor,
-                                price: flavor.price.toString(),
-                                active: orderProvider.flavor?.id == flavor.id,
-                                onTapHandler: () {
-                                  orderProvider.flavor = flavor;
+                                  return OptionCardTest(
+                                    imageUrl: flavor.imgUrl,
+                                    title: flavor.flavor,
+                                    price: flavor.price.toString(),
+                                    active:
+                                        orderProvider.flavor?.id == flavor.id,
+                                    onTapHandler: () {
+                                      orderProvider.flavor = flavor;
+                                    },
+                                  );
                                 },
-                              );
-                            },
-                          ),
-                        ),
+                              ),
+                            ),
+                  if (flavorsProvider.isLoading || flavorsProvider.flavors!.isEmpty) const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

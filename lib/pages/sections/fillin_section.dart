@@ -26,35 +26,44 @@ class FillingSection extends StatelessWidget {
                   const TitleSection(title: "Relleno"),
                   stuffingsProvider.isLoading
                       ? const Center(child: CircularProgressIndicator())
-                      : Expanded(
-                          child: GridView.builder(
-                            padding: const EdgeInsets.all(12),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  orientation == Orientation.portrait ? 2 : 4,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10,
-                              childAspectRatio: 0.90,
-                            ),
-                            itemCount: stuffingsProvider.stuffings?.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final stuffing =
-                                  stuffingsProvider.stuffings![index];
+                      : stuffingsProvider.stuffings!.isEmpty
+                          ? const Center(
+                              child: Text("No hay opciones"),
+                            )
+                          : Expanded(
+                              child: GridView.builder(
+                                padding: const EdgeInsets.all(12),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      orientation == Orientation.portrait
+                                          ? 2
+                                          : 4,
+                                  mainAxisSpacing: 10,
+                                  crossAxisSpacing: 10,
+                                  childAspectRatio: 0.90,
+                                ),
+                                itemCount: stuffingsProvider.stuffings?.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final stuffing =
+                                      stuffingsProvider.stuffings![index];
 
-                              return OptionCardTest(
-                                imageUrl: stuffing.imgUrl,
-                                title: stuffing.stuffing,
-                                price: stuffing.price.toString(),
-                                active:
-                                    orderProvider.stuffing?.id == stuffing.id,
-                                onTapHandler: () {
-                                  orderProvider.stuffing = stuffing;
+                                  return OptionCardTest(
+                                    imageUrl: stuffing.imgUrl,
+                                    title: stuffing.stuffing,
+                                    price: stuffing.price.toString(),
+                                    active: orderProvider.stuffing?.id ==
+                                        stuffing.id,
+                                    onTapHandler: () {
+                                      orderProvider.stuffing = stuffing;
+                                    },
+                                  );
                                 },
-                              );
-                            },
-                          ),
-                        ),
+                              ),
+                            ),
+                  if (stuffingsProvider.isLoading ||
+                      stuffingsProvider.stuffings!.isEmpty)
+                    const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

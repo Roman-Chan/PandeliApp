@@ -26,33 +26,41 @@ class WidthSection extends StatelessWidget {
                   const TitleSection(title: "Tamaño"),
                   sizesProvider.isLoading
                       ? const Center(child: CircularProgressIndicator())
-                      : Expanded(
-                          child: GridView.builder(
-                            padding: const EdgeInsets.all(12),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  orientation == Orientation.portrait ? 2 : 4,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10,
-                              childAspectRatio: 0.80,
-                            ),
-                            itemCount: sizesProvider.sizes?.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final size = sizesProvider.sizes![index];
-            
-                              return OptionCardTest(
-                                imageUrl: size.imgUrl,
-                                title: size.size,
-                                price: size.price.toString(),
-                                onTapHandler: () {
-                                  orderProvider.size = size;
+                      : sizesProvider.sizes!.isEmpty
+                          ? const Center(
+                              child: Text("No hay opciones"),
+                            )
+                          : Expanded(
+                              child: GridView.builder(
+                                padding: const EdgeInsets.all(12),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      orientation == Orientation.portrait
+                                          ? 2
+                                          : 4,
+                                  mainAxisSpacing: 10,
+                                  crossAxisSpacing: 10,
+                                  childAspectRatio: 0.80,
+                                ),
+                                itemCount: sizesProvider.sizes?.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final size = sizesProvider.sizes![index];
+
+                                  return OptionCardTest(
+                                    imageUrl: size.imgUrl,
+                                    title: size.size,
+                                    price: size.price.toString(),
+                                    onTapHandler: () {
+                                      orderProvider.size = size;
+                                    },
+                                    active: orderProvider.size?.id == size.id,
+                                  );
                                 },
-                                active: orderProvider.size?.id == size.id,
-                              );
-                            },
-                          ),
-                        ),
+                              ),
+                            ),
+                  if (sizesProvider.isLoading || sizesProvider.sizes!.isEmpty)
+                    const Spacer(),
                   ElevatedButton(
                     onPressed: orderProvider.size != null
                         ? () {

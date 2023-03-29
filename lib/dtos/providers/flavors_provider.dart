@@ -47,6 +47,10 @@ class FlavorsProvider extends ChangeNotifier {
         isError = false;
 
         notifyListeners();
+      } else {
+        _flavors = [];
+        isLoading = false;
+        notifyListeners();
       }
     } catch (e) {
       logger.d(e);
