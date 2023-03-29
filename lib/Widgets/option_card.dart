@@ -35,6 +35,8 @@ class OptionCard extends StatelessWidget {
                 width: double.infinity,
                 height: widthAndHeight,
                 fit: BoxFit.cover,
+                imageErrorBuilder: (context, error, stackTrace) =>
+                    Image.asset('images/404-placeholder.png', width: double.infinity, height: widthAndHeight, fit: BoxFit.cover,),
               ),
             ),
             const Spacer(),
