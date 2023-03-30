@@ -45,6 +45,10 @@ class DesignsProvider extends ChangeNotifier {
         isError = false;
 
         notifyListeners();
+      } else {
+        _designs = [];
+        isLoading = false;
+        notifyListeners();
       }
     } catch (e) {
       logger.d(e);

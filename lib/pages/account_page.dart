@@ -57,15 +57,6 @@ class AccountPage extends StatelessWidget {
                   },
                 ),
                 CustomCard(
-                  title: "Metodo de pago",
-                  icon: Icons.credit_card,
-                  iconColor: Colors.green,
-                  backgroundColor: Colors.white,
-                  onTap: () {
-                    screenChangePayment(context);
-                  },
-                ),
-                CustomCard(
                   title: "Direcciones",
                   icon: Icons.location_on,
                   iconColor: Colors.red,

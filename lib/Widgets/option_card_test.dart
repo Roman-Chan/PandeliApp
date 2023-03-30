@@ -69,6 +69,13 @@ class CardContent extends StatelessWidget {
                 width: double.infinity,
                 height: widthAndHeight,
                 fit: BoxFit.cover,
+                imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                  'images/404-placeholder.png',
+                  width: double.infinity,
+                  height: widthAndHeight,
+                  fit: BoxFit.cover,
+                  alignment: Alignment(0, -.2),
+                ),
               ),
             ),
             const Spacer(),
