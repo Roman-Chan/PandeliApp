@@ -114,6 +114,8 @@ class ListViewOrders extends StatelessWidget {
                       image: orden.imgUrl,
                       fit: BoxFit.cover,
                       height: 200,
+                      imageErrorBuilder: (context, error, stackTrace) =>
+                          Image.asset('images/404-placeholder.png'),
                     ),
                   ),
                   const SizedBox(

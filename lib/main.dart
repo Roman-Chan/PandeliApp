@@ -1,12 +1,10 @@
 /* MATERIAL */
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/dtos/providers/reset_password_provider.dart';
-import 'package:pandeli_app/pages/change_password_page.dart';
-import 'package:pandeli_app/pages/order_page.dart';
 /* PUBS */
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 /* PROVIDERS */
+import 'package:pandeli_app/dtos/providers/reset_password_provider.dart';
 import 'package:pandeli_app/dtos/providers/designs_provider.dart';
 import 'package:pandeli_app/dtos/providers/flavors_provider.dart';
 import 'package:pandeli_app/dtos/providers/login_providers.dart';
@@ -17,8 +15,9 @@ import 'package:pandeli_app/dtos/providers/address_provider.dart';
 import 'package:pandeli_app/dtos/providers/orders_provider.dart';
 import 'package:pandeli_app/dtos/providers/info_provider.dart';
 import 'package:pandeli_app/dtos/providers/register_provider.dart';
-import 'package:pandeli_app/dtos/providers/order_provider.dart';
 /* PAGES */
+import 'package:pandeli_app/pages/change_password_page.dart';
+import 'package:pandeli_app/pages/order_page.dart';
 import 'package:pandeli_app/pages/account_page.dart';
 import 'package:pandeli_app/pages/info_order_page.dart';
 import 'package:pandeli_app/pages/info_profile_page.dart';
@@ -54,8 +53,6 @@ void main() async {
             create: (context) => StuffingsProvider()..fetchStuffings()),
         ChangeNotifierProvider<SizesProvider>(
             create: (context) => SizesProvider()..fetchSizes()),
-        ChangeNotifierProvider<OrderProvider>(
-            create: ((context) => OrderProvider())),
         ChangeNotifierProvider<OrdersProvider>(
             create: (context) => OrdersProvider()..fetchOrders()),
         ChangeNotifierProvider<AddressProvider>(

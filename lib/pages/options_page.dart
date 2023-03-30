@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pandeli_app/dtos/providers/order_provider.dart';
+import 'package:pandeli_app/dtos/providers/orders_provider.dart';
 import 'package:pandeli_app/pages/sections/fillin_section.dart';
 import 'package:pandeli_app/pages/sections/flavor_section.dart';
 import 'package:pandeli_app/pages/sections/width_section.dart';
@@ -12,8 +12,6 @@ class OptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final args =
-    // ModalRoute.of(context)?.settings.arguments as DesignOptionSelected;
 
     PageController pageController = PageController();
 
@@ -22,7 +20,7 @@ class OptionsPage extends StatelessWidget {
         leading: BackButton(
           color: Colors.black,
           onPressed: () {
-            context.read<OrderProvider>().clearOptions();
+            context.read<OrdersProvider>().clearOptions();
             Navigator.of(context).pop();
           },
         ),

@@ -48,6 +48,10 @@ class SizesProvider extends ChangeNotifier {
         isError = false;
 
         notifyListeners();
+      } else {
+        _sizes = [];
+        isLoading = false;
+        notifyListeners();
       }
     } catch (e) {
       logger.d(e);
