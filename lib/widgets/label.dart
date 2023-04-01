@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class Label extends StatelessWidget {
   final String text;
-  const Label({super.key, required this.text});
+  final TextEditingController controller;
+  const Label({super.key, required this.text,
+  required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,7 @@ class Label extends StatelessWidget {
         children: [
           SizedBox(
             child: TextField(
+              controller: controller,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,

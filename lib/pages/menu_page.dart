@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:pandeli_app/pages/account_page.dart';
 import 'package:pandeli_app/pages/make_order_page.dart';
-import 'package:pandeli_app/pages/orders_page.dart';
+import 'package:pandeli_app/pages/list_view_orders.dart';
+/* import 'package:pandeli_app/pages/orders_page.dart'; */
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -14,7 +16,8 @@ class _MenuPageState extends State<MenuPage> {
   int _selectedIndex = 1;
 
   static const List<Widget> _pageOptions = <Widget>[
-    OrdersPage(),
+    /*  OrdersPage(), */
+    ListViewOrders(),
     MakeOrderPage(),
     AccountPage()
   ];
@@ -29,10 +32,15 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 1,
         shadowColor: Theme.of(context).colorScheme.outline,
         surfaceTintColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Home'),
+        title: Text(_selectedIndex == 1
+            ? 'Home'
+            : _selectedIndex == 0
+                ? 'Orders'
+                : 'Perfil'),
       ),
       body: _pageOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -45,15 +53,15 @@ class _MenuPageState extends State<MenuPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.list_alt_sharp),
-            label: "Orders",
+            label: "Ordenes",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Home",
+            label: "Inicio",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: "Account",
+            label: "Cuenta",
           ),
         ],
       ),

@@ -5,7 +5,8 @@ import 'package:pandeli_app/pages/options_page.dart';
 class OptionDesign extends StatelessWidget {
   final String imageUrl;
   final String title;
-  const OptionDesign({super.key, required this.imageUrl, required this.title});
+  final String price;
+  const OptionDesign({super.key, required this.imageUrl, required this.title, required this.price,});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class OptionDesign extends StatelessWidget {
           arguments: DesignOptionSelected(title),
         );
       },
-      child: OptionCard(imageUrl: imageUrl, title: title),
+      child: OptionCard(imageUrl: imageUrl, title: title, price: price,),
     );
   }
 }

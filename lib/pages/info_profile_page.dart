@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pandeli_app/Widgets/info_inputs/title.dart';
+import 'package:pandeli_app/Widgets/info_inputs/view_info_user.dart';
 
 class InfoProfilePage extends StatelessWidget {
   const InfoProfilePage({super.key});
@@ -6,17 +8,21 @@ class InfoProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
+        backgroundColor: const Color(0xff0F3DDE1),
+        appBar: AppBar(
+          title: const Text('Profile'),
         ),
-      ),
-    );
+        body: ListView(
+          children: [
+            Column(
+              children: const [
+                TitleInfo(),
+                SizedBox(height: 10,),
+                ViewProfile(),
+              ],
+            ),
+          ],
+        )
+      );
   }
 }
