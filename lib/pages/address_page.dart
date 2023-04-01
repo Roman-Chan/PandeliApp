@@ -34,44 +34,41 @@ class AddressPage extends StatelessWidget {
           Expanded(
             child: Consumer<AddressProvider>(
               builder: (context, addressProvider, child) {
-                if (addressProvider.isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (addressProvider.address == null ||
-                    addressProvider.address!.isEmpty) {
-                  return const Center(
-                    child: Text('No hay Direcciones.'),
-                  );
-                } else {
-                  final addressess = addressProvider.address;
-                  return ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    itemCount: addressess!.length,
-                    itemBuilder: (context, i) {
-                      final address = addressess[i];
-                      return Card(
-                        margin: const EdgeInsets.only(bottom: 5),
-                        child: ListTile(
-                          title: Text(
-                            address.address,
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                          leading: const Icon(
-                            Icons.directions_outlined,
-                            color: Colors.blue,
-                          ),
-                          trailing: const Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }
+                
+                return addressProvider.isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : addressProvider.address!.isEmpty
+                        ? const Center(
+                            child: Text('No hay direcciones'),
+                          )
+                        : ListView.builder(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            itemCount: addressProvider.address!.length,
+                            itemBuilder: (context, i) {
+                              final address = addressProvider.address![i];
+                              return Card(
+                                margin: const EdgeInsets.only(bottom: 5),
+                                child: ListTile(
+                                  title: Text(
+                                    address.address,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  leading: const Icon(
+                                    Icons.directions_outlined,
+                                    color: Colors.blue,
+                                  ),
+                                  trailing: const Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
               },
             ),
           ),

@@ -57,8 +57,13 @@ class AddressProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       }
+
+      logger.d(isLoading);
     } catch (e) {
       logger.d(e);
+      isLoading = false;
+      _address = [];
+      notifyListeners();
     }
   }
 
