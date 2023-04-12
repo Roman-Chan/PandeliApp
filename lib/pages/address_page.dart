@@ -13,28 +13,14 @@ class AddressPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: _backgroundColor,
       appBar: AppBar(
+        elevation: 0,
         title: const Text('Direcciones'),
       ),
       body: Column(
         children: [
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            "Mis Direcciones",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: _color,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
           Expanded(
             child: Consumer<AddressProvider>(
               builder: (context, addressProvider, child) {
-                
                 return addressProvider.isLoading
                     ? const Center(
                         child: CircularProgressIndicator(),
@@ -44,12 +30,17 @@ class AddressPage extends StatelessWidget {
                             child: Text('No hay direcciones'),
                           )
                         : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
                             itemCount: addressProvider.address!.length,
                             itemBuilder: (context, i) {
                               final address = addressProvider.address![i];
                               return Card(
-                                margin: const EdgeInsets.only(bottom: 5),
+                                margin: const EdgeInsets.only(bottom: 4),
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
                                 child: ListTile(
                                   title: Text(
                                     address.address,
@@ -61,9 +52,14 @@ class AddressPage extends StatelessWidget {
                                     Icons.directions_outlined,
                                     color: Colors.blue,
                                   ),
-                                  trailing: const Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
+                                  trailing: IconButton(
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      addressProvider.deleteAddress(i);
+                                    },
                                   ),
                                 ),
                               );
@@ -75,7 +71,7 @@ class AddressPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
+        backgroundColor: _color,
         onPressed: () {
           Navigator.push(
             context,
@@ -86,7 +82,7 @@ class AddressPage extends StatelessWidget {
         },
         child: const Icon(
           Icons.add,
-          color: Colors.blue,
+          color: Colors.white,
         ),
       ),
     );

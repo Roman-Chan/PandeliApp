@@ -37,15 +37,15 @@ class AccountPage extends StatelessWidget {
       backgroundColor: _backgroundColor,
       body: Column(
         children: [
-          Container(
+       /*    Container(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: const Text("Detalles de cuenta",
                 style: TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 18, color: _Color)),
-          ),
+          ), */
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 13),
+              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
               children: <Widget>[
                 CustomCard(
                   title: "Informacion de perfil",

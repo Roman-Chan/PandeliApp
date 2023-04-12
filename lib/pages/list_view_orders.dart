@@ -9,7 +9,7 @@ class ListViewOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const _Color = Color(0xff0a1356b);
-    const _backgroundColor = Color(0xff0F3DDE1);
+    const _backgroundColor = Color(0xff0F7D8DF);
 
     return Scaffold(
       backgroundColor: _backgroundColor,
@@ -32,7 +32,7 @@ class ListViewOrders extends StatelessWidget {
             } else {
               return Column(
                 children: [
-                  Container(
+                  /*  Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: const Text(
                       "Mis pedidos",
@@ -41,21 +41,41 @@ class ListViewOrders extends StatelessWidget {
                           fontSize: 18,
                           color: _Color),
                     ),
-                  ),
+                  ), */
                   Expanded(
                     child: ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 10),
                       itemCount: ordersProvider.orders?.length,
                       itemBuilder: (context, index) {
                         final orden = ordersProvider.orders?[index];
-
                         return Card(
                           child: ListTile(
-                            title: Text(
-                              orden!.description,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                            title: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    orden!.description,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: _Color,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  orden.status == "preparing order"
+                                      ? "preparing order"
+                                      : "order finished",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: orden.status == "preparing order"
+                                        ? Colors.green
+                                        : Colors.red,
+                                  ),
+                                ),
+                              ],
                             ),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,10 +95,10 @@ class ListViewOrders extends StatelessWidget {
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
-                            trailing: Text(
+                            /*  trailing: Text(
                               orden.status,
                               style: const TextStyle(color: Colors.green),
-                            ),
+                            ), */
                             onTap: () {
                               detailsAlert(context, orden);
                             },

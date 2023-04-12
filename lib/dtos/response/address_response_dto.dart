@@ -7,6 +7,16 @@ class AddressResponseDto {
 
   final int index;
   final String address;
+
+  factory AddressResponseDto.fromMap(Map<String, dynamic> json) =>
+      AddressResponseDto(index: json['index'], address: json['address']);
+
+  Map<String, dynamic> toJson() => {
+        "index": index,
+        "address": address,
+      };
+}
+
   // final List<String> addresses;
 
   // int get length => addresses.length;
@@ -17,12 +27,3 @@ class AddressResponseDto {
   //     AddressResponseDto(
   //       addresses: (json["addresses"] as List<dynamic>).map((address) => address.toString()).toList(),
   //     );
-
-  factory AddressResponseDto.fromMap(Map<String, dynamic> json) =>
-      AddressResponseDto(index: json['index'], address: json['address']);
-
-  Map<String, dynamic> toJson() => {
-        "index": index,
-        "address": address,
-      };
-}

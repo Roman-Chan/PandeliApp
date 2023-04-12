@@ -125,4 +125,5 @@ class AddressProvider extends ChangeNotifier {
       logger.e('Error deleting address: $e');
     }
   }
+
 }
